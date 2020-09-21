@@ -34,14 +34,13 @@ Just invoke the `Cookiecutter`_ template to create a new project: ::
 
     cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
 
-Package content (TODO)
+Package content
     A Python3 package with everything to start:
 
     * Development in a Python virtual environment with `virtualenv`_ and `pip`_;
     * Promote Test Driven Development with `Pytest`_;
     * Configuration in ``setup.cfg`` ready to upload package to Pypi;
     * Sample object to say hello world;
-    * Sample commandline actions with `Click`_;
     * `Flake8`_ configuration for quality review;
     * Tests on sample object;
     * `tox`_ configuration for tests;
@@ -52,9 +51,23 @@ Package content (TODO)
     Package cover some basic features:
 
     * Object inheritance;
-    * Click basic features;
     * Python logging usage;
     * Testing core, command line and logging;
+
+TODO: About first project install
+    Created project have models but no migrations. This is to avoid creating
+    migration for models you will surely change or remove.
+
+    This will result in failures on tests and running application until you
+    have created initial migrations. There is a makefile action for this: ::
+
+        make migrations
+
+    Will automatically search to create new migrations for your application
+    if there is some changes or new models. When done, there is makefile action
+    to apply new migrations: ::
+
+        make migrate
 
 Package requirements
     To use it from repository url you just need `Cookiecutter`_.

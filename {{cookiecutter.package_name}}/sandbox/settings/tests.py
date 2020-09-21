@@ -16,4 +16,4 @@ DATABASES = {
 
 # Media directory dedicated to tests to avoid polluting other environment
 # media directory
-MEDIA_ROOT = os.path.join(DATA_DIR, "media-tests")
+MEDIA_ROOT = join(VAR_PATH, "media-tests")

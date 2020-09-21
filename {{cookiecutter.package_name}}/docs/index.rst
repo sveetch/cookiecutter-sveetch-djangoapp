@@ -3,11 +3,11 @@
 
 .. django-qr-vcard documentation master file, created by David Thenon
 
-===============
-Django QR Vcard
-===============
+{{ '=' * cookiecutter.project_name|length }}
+{{ cookiecutter.project_name }}
+{{ '=' * cookiecutter.project_name|length }}
 
-A Django app to create Vcard page reachable from a QR Code
+{{ cookiecutter.project_short_description|wordwrap(80) }}
 
 Dependancies
 ************
@@ -18,9 +18,9 @@ Dependancies
 Links
 *****
 
-* Read the documentation on `Read the docs <https://django-qr-vcard.readthedocs.io/>`_;
-* Download its `PyPi package <https://pypi.python.org/pypi/django-qr-vcard>`_;
-* Clone it on its `Github repository <https://github.com/emencia/django-qr-vcard>`_;
+* Read the documentation on `Read the docs <https://{{ cookiecutter.package_name }}.readthedocs.io/>`_;
+* Download its `PyPi package <https://pypi.python.org/pypi/{{ cookiecutter.package_name }}>`_;
+* Clone it on its `Github repository <https://github.com/{{ cookiecutter.author_username }}/{{ cookiecutter.package_name }}>`_;
 
 User’s Guide
 ************
