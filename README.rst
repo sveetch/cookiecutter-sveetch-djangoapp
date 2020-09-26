@@ -64,8 +64,8 @@ TODO: About first project install
         make migrations
 
     Will automatically search to create new migrations for your application
-    if there is some changes or new models. When done, there is makefile action
-    to apply new migrations: ::
+    if there is some changes or new models. When done, there is a makefile
+    action to apply new migrations: ::
 
         make migrate
 
