@@ -15,8 +15,11 @@ def test_basic(db):
     blog.full_clean()
     blog.save()
 
+    url = "/{blog_pk}/".format(blog_pk=blog.id)
+
     assert 1 == Blog.objects.filter(title="Foo").count()
     assert "Foo" == blog.title
+    assert url == blog.get_absolute_url()
 
 
 def test_required_fields(db):
