@@ -49,15 +49,16 @@ def html_pyquery(content):
     """
     Shortand to use Pyquery parsing on given content.
 
-    This is more useful to dig in advanced HTML content.
+    This is more useful to dig in advanced HTML content. PyQuery is basically a
+    wrapper around ``lxml.etree`` it helps with a more intuitive API (alike
+    Jquery) to traverse elements but when reaching a node content it will
+    return ``lxml.html.HtmlElement`` object which have a less intuitive API.
 
     Arguments:
         content (TemplateResponse or string): HTML content to parse.
 
     Returns:
-        pyquery.PyQuery: A PyQuery object able to perform some traversing and
-        manipulation on HTML like Jquery. See PyQuery documentation for more
-        details.
+        pyquery.PyQuery: A PyQuery object.
     """
     return pq(
         decode_response_or_string(content),

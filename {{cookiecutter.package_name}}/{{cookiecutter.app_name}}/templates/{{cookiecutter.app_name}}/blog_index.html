@@ -6,14 +6,16 @@
 <div class="blog-index">
     <h2>{% trans "Blogs" %}</h2>
 
-    <ul>
-        {% for blog in object_list %}
-            <li>
-                <a href="{{ blog.get_absolute_url }}"></a>
-            </li>
-        {% empty %}
-            <li>{% trans "No blogs yet." %}</li>
-        {% endfor %}
+    <ul class="blog-list">
+    {% for blog in object_list %}
+        <li>
+            <a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a>
+        </li>
+    {% empty %}
+        <li>{% trans "No blogs yet." %}</li>
+    {% endfor %}
     </ul>
+
+    {% endraw %}{{ '{%' }} include "{{ cookiecutter.app_name }}/pagination.html" {{ '%}' }}{% raw %}
 </div>
 {% endspaceless %}{% endblock app_content %}{% endraw %}
