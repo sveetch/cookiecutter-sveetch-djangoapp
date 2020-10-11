@@ -1,4 +1,4 @@
-from tests.utils import html_element, html_pyquery
+from tests.utils import html_pyquery
 
 from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory
 from {{ cookiecutter.app_name }}.models import Article, Blog
@@ -56,7 +56,7 @@ def test_blog_index_pagination(settings, db, client):
     # result pages
     blog_total = (settings.BLOG_PAGINATION * 2) + 1
 
-    blogs = BlogFactory.create_batch(blog_total)
+    BlogFactory.create_batch(blog_total)
 
     assert blog_total == Blog.objects.all().count()
 
@@ -137,7 +137,7 @@ def test_blog_detail_article_pagination(settings, db, client):
 
     article_total = (settings.ARTICLE_PAGINATION * 2) + 1
 
-    articles = ArticleFactory.create_batch(article_total, blog=blog1)
+    ArticleFactory.create_batch(article_total, blog=blog1)
 
     assert article_total == Article.objects.all().count()
 

@@ -1,7 +1,6 @@
-from tests.utils import html_element, html_pyquery
+from tests.utils import html_pyquery
 
 from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory
-from {{ cookiecutter.app_name }}.models import Article, Blog
 
 
 def test_article_detail_404(db, client):
@@ -52,4 +51,6 @@ def test_article_detail_content(db, client):
 
     assert blog_title.text() == blog.title
     assert article_title.text() == article.title
-    assert article_content.text() == article.content
+    # Avoid text() method to remove white spaces since content may contain some
+    # line breaks
+    assert article_content.text(squash_space=False) == article.content
