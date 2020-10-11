@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 
@@ -12,6 +11,7 @@ class ArticleDetailView(DetailView):
     """
     pk_url_kwarg = "article_pk"
     template_name = "{{ cookiecutter.app_name }}/article_detail.html"
+    context_object_name = "article_object"
 
     def get_queryset(self):
         """
@@ -24,7 +24,7 @@ class ArticleDetailView(DetailView):
             pk=self.kwargs.get("blog_pk"),
         )
 
-        return Article.objects.filter(blog=blog_object)
+        return Article.objects.filter(blog=self.blog_object)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

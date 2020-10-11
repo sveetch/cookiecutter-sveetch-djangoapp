@@ -1,4 +1,4 @@
-{% spaceless %}{% if paginator %}
+{% raw %}{% spaceless %}{% if paginator %}
     <div class="pagination">
     {% for page_num in paginator.page_range %}
         <a href="?page={{ page_num }}"
@@ -6,4 +6,4 @@
         >{{ page_num }}</a>
     {% endfor %}
     </div>
-{% endif %}{% endspaceless %}
+{% endif %}{% endspaceless %}{% endraw %}
