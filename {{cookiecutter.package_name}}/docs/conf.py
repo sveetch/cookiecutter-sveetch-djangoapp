@@ -14,19 +14,19 @@ import os
 import sys
 
 # Get the module version
-from qr_vcard import __version__ as qr_vcard_version
+from {{ cookiecutter.app_name }} import __version__ as {{ cookiecutter.app_name }}_version
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'django-qr-vcard'
-copyright = '2020, David Thenon'
-author = 'David Thenon'
+project = '{{ cookiecutter.package_name }}'
+copyright = '{% now 'local', '%Y' %}, {{ cookiecutter.author_name }}'
+author = '{{ cookiecutter.author_name }}'
 
 # The short X.Y version
-version = qr_vcard_version
+version = {{ cookiecutter.app_name }}_version
 # The full version, including alpha/beta/rc tags
-release = qr_vcard_version
+release = {{ cookiecutter.app_name }}_version
 
 
 # -- General configuration ---------------------------------------------------

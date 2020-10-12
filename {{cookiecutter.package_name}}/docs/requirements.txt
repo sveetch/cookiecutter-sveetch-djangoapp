@@ -1,1 +1,1 @@
-django-qr-vcard
+{{ cookiecutter.package_name }}

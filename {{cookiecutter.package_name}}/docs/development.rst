@@ -17,7 +17,7 @@ Development
 Development requirements
 ************************
 
-django-qr-vcard is developed with:
+{{ cookiecutter.package_name }} is developed with:
 
 * *Test Development Driven* (TDD) using `Pytest`_;
 * Respecting flake and pip8 rules using `Flake8`_;
@@ -36,11 +36,11 @@ Install for development
 First ensure you have `pip`_ and `virtualenv`_ packages installed then
 type: ::
 
-    git clone https://github.com/emencia/django-qr-vcard.git
-    cd django-qr-vcard
+    git clone https://github.com/{{ cookiecutter.author_username }}/{{ cookiecutter.package_name }}.git
+    cd {{ cookiecutter.package_name }}
     make install
 
-django-qr-vcard will be installed in editable mode from the
+{{ cookiecutter.package_name }} will be installed in editable mode from the
 latest commit on master branch with some development tools.
 
 Unittests
@@ -63,7 +63,7 @@ at your system level (tox dependancy is not in requirements): ::
 
     sudo pip install tox
 
-Then go in the ``django-qr-vcard`` directory, where the
+Then go in the ``{{ cookiecutter.package_name }}`` directory, where the
 ``setup.py`` and ``tox.ini`` live and execute tox: ::
 
     tox

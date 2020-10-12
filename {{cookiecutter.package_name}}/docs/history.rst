@@ -4,7 +4,7 @@
 History
 =======
 
-Version 0.1.0 - Unreleased
---------------------------
+Version {{ cookiecutter.version }} - Unreleased
+--------{{ '-' * cookiecutter.version|string|length }}-------------
 
 * First commit.

@@ -8,7 +8,6 @@
 .. _Sphinx: http://www.sphinx-doc.org
 .. _tox: http://tox.readthedocs.io
 .. _livereload: https://livereload.readthedocs.io
-.. _Click: https://click.palletsprojects.com
 .. _Read the Docs: https://readthedocs.org/
 .. _reStructuredText: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
 .. _twine: https://twine.readthedocs.io
@@ -40,9 +39,8 @@ Package content
     * Development in a Python virtual environment with `virtualenv`_ and `pip`_;
     * Promote Test Driven Development with `Pytest`_;
     * Configuration in ``setup.cfg`` ready to upload package to Pypi;
-    * Sample object to say hello world;
+    * Sample blog application (very very minimalist) fully tested;
     * `Flake8`_ configuration for quality review;
-    * Tests on sample object;
     * `tox`_ configuration for tests;
     * Code is fully documented with `reStructuredText`_ and `Napoleon`_
       extension for `Sphinx`_.
@@ -50,11 +48,11 @@ Package content
 
     Package cover some basic features:
 
-    * Object inheritance;
-    * Python logging usage;
-    * Testing core, command line and logging;
+    * Basic generic views usage;
+    * Testing models, factories and views;
+    * pyquery usage for tests on HTML contents;
 
-TODO: About first project install
+About first project install and model migrations
     Created project have models but no migrations. This is to avoid creating
     migration for models you will surely change or remove.
 
@@ -63,23 +61,30 @@ TODO: About first project install
 
         make migrations
 
-    Will automatically search to create new migrations for your application
+    It will automatically search to create new migrations for your application
     if there is some changes or new models. When done, there is a makefile
     action to apply new migrations: ::
 
         make migrate
 
+    So if you just plan to check created package, just performs migration
+    creation. However if you plan to create your own application, create your
+    models and make migrations once finished.
+
+    But remember until you've done migrations, tests will fails.
+
 Package requirements
     To use it from repository url you just need `Cookiecutter`_.
 
-    However if you want to install it locally (to avoid doing request each time
-    you use it) you will need virtualenv and use the ``make install`` from
-    template Makefile. Once installed you can create a bash alias like: ::
+    Once project is created, you can install it locally with ``make install``
+    from project directory.
 
-        alias cookpy='/home/your/install/cookiecutter-sveetch-python/.venv/bin/cookiecutter /home/your/install/cookiecutter-sveetch-python'
+    However you can install this cookie locally (to avoid doing request each time
+    you use it), you will need virtualenv, clone it where you want and use its
+    ``make install`` command. Once installed you can create shortcut with a bash
+    alias in your ``.bash_aliases``: ::
 
-    Once created, you can install it locally with ``make install`` from project
-    directory.
+        alias cookdjango='/home/your/install/cookiecutter-sveetch-django/.venv/bin/cookiecutter /home/your/install/cookiecutter-sveetch-django'
 
 Naming
     For a given ``Sample bar`` project name:
@@ -98,5 +103,5 @@ Options
 
     You can pre define some options in your
     `cookiecutter user configuration <https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html>`_
-    to avoid to input it each time. This is especially recommended for the
-    author and username ones.
+    to avoid to input them each time you use this cookie. This is especially
+    recommended for the author and username ones.
