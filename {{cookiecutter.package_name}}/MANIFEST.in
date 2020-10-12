@@ -1,0 +1,14 @@
+include MANIFEST.in
+include LICENCE.txt
+include README.rst
+
+exclude sphinx_reload.py
+
+recursive-include {{ cookiecutter.app_name }}/templates *
+recursive-include {{ cookiecutter.app_name }}/static *
+recursive-include {{ cookiecutter.app_name }}/locale *
+
+recursive-exclude tests *
+recursive-exclude sandbox *
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]

@@ -1,0 +1,21 @@
+{{ '{%' }} extends "{{ cookiecutter.app_name }}/base.html" {{ '%}' }}
+{% raw %}{% load i18n %}
+
+
+{% block app_content %}{% spaceless %}
+<div class="blog-detail">
+    <h2>{{ blog_object.title }}</h2>
+
+    <ul class="article-list">
+    {% for article in object_list %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </li>
+    {% empty %}
+        <li>{% trans "No articles yet." %}</li>
+    {% endfor %}
+    </ul>
+
+    {% endraw %}{{ '{%' }} include "{{ cookiecutter.app_name }}/pagination.html" {{ '%}' }}{% raw %}
+</div>
+{% endspaceless %}{% endblock app_content %}{% endraw %}

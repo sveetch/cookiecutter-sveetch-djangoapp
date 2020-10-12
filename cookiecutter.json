@@ -1,0 +1,14 @@
+{
+    "author_name": "Your name",
+    "author_email": "Your email",
+    "author_username": "dummy",
+
+    "project_name": "Project name",
+    "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
+    "app_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+
+    "project_short_description": "A Django application package.",
+
+    "pypi_username": "{{ cookiecutter.author_username }}",
+    "version": "0.1.0"
+}
