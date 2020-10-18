@@ -13,6 +13,17 @@
 import os
 import sys
 
+
+# Settings file required by Django
+sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_settings')
+
+
+# Setup Django
+import django
+django.setup()
+
+
 # Get the module version
 from {{ cookiecutter.app_name }} import __version__ as {{ cookiecutter.app_name }}_version
 
