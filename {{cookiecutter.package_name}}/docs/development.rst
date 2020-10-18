@@ -63,23 +63,26 @@ at your system level (tox dependancy is not in requirements): ::
 
     sudo pip install tox
 
-Then go in the ``{{ cookiecutter.package_name }}`` directory, where the
-``setup.py`` and ``tox.ini`` live and execute tox: ::
+Then go in the ``{{ cookiecutter.package_name }}`` directory execute tox: ::
 
     tox
 
 Documentation
 -------------
 
-Use the Makefile action ``livedocs`` to serve documentation and automatically
-rebuild it when you change documentation files.
+You can easily build the documentation from one Makefile action: ::
 
-When environnement is activated, you can use following command from ``docs/``
-directory: ::
+    make docs
+
+There is Makefile action ``livedocs`` to serve documentation and automatically
+rebuild it when you change documentation files: ::
 
     make livedocs
 
 And go on ``http://localhost:8002/`` or your server machine IP with port 8002.
+
+Note that you need to build the documentation at least once before using
+``livedocs``.
 
 Releasing
 ---------

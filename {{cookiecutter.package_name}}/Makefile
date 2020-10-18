@@ -22,8 +22,8 @@ help:
 	@echo "  install             -- to install this project with virtualenv and Pip"
 	@echo ""
 	@echo "  clean               -- to clean EVERYTHING (Warning)"
-	@echo "  clean-var          -- to clean data (uploaded medias, database, etc..)"
-	@echo "  clean-doc       -- to remove documentation builds"
+	@echo "  clean-var           -- to clean data (uploaded medias, database, etc..)"
+	@echo "  clean-doc           -- to remove documentation builds"
 	@echo "  clean-install       -- to clean Python side installation"
 	@echo "  clean-pycache       -- to remove all __pycache__, this is recursive from current directory"
 	@echo ""
@@ -32,6 +32,7 @@ help:
 	@echo "  migrations          -- to create new migrations for application after changes"
 	@echo "  superuser           -- to create a superuser for Django admin"
 	@echo ""
+	@echo "  docs                -- to build documentation"
 	@echo "  livedocs            -- to run livereload server to rebuild documentation on source changes"
 	@echo ""
 	@echo "  flake               -- to launch Flake8 checking"
@@ -95,7 +96,6 @@ superuser:
 
 install: venv create-var-dirs
 	$(PIP) install -e .[dev]
-# 	${MAKE} migrations
 	${MAKE} migrate
 .PHONY: install
 
@@ -103,6 +103,10 @@ run:
 	@DJANGO_SECRET_KEY=$(DEMO_DJANGO_SECRET_KEY) \
 	$(DJANGO_MANAGE) runserver 0.0.0.0:8001
 .PHONY: run
+
+docs:
+	cd docs && make html
+.PHONY: docs
 
 livedocs:
 	$(SPHINX_RELOAD)

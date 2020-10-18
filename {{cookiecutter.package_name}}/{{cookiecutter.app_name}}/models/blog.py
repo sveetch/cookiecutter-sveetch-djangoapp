@@ -1,3 +1,9 @@
+"""
+====
+Blog
+====
+
+"""
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
@@ -5,7 +11,7 @@ from django.urls import reverse
 
 class Blog(models.Model):
     """
-    Blog model.
+    A very simple blog to contain articles.
     """
     title = models.CharField(
         _("title"),
@@ -14,6 +20,9 @@ class Blog(models.Model):
         default="",
         unique=True,
     )
+    """
+    Required unique title string.
+    """
 
     class Meta:
         verbose_name = _("Blog")
@@ -23,6 +32,12 @@ class Blog(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        """
+        Return absolute URL to the blog detail view.
+
+        Returns:
+            string: An URL.
+        """
         return reverse("{{ cookiecutter.app_name }}:blog-detail", args=[
             str(self.id)
         ])
