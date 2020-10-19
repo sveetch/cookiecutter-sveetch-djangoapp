@@ -1,7 +1,7 @@
 .. _Python: https://www.python.org
 .. _Django: https://www.djangoproject.com/
 
-.. django-qr-vcard documentation master file, created by David Thenon
+.. {{ cookiecutter.package_name }} documentation master file, created by {{ cookiecutter.author_name }}
 
 {{ '=' * cookiecutter.project_name|length }}
 {{ cookiecutter.project_name }}
