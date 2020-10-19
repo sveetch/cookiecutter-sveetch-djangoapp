@@ -23,7 +23,7 @@ It emphases on simple package with quality and not any relation to
 any service (state badge, pyup, travis, etc..) except `Read the Docs`_
 link in README.
 
-TODO: A sample built from this template is available on repository
+A sample built from this template is available on repository
 `sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_.
 
 Usage
@@ -34,20 +34,22 @@ Just invoke the `Cookiecutter`_ template to create a new project: ::
     cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
 
 Package content
-    A Python3 package with everything to start:
+    A Django package with everything to start:
 
     * Development in a Python virtual environment with `virtualenv`_ and `pip`_;
     * Promote Test Driven Development with `Pytest`_;
+    * Last Django versions support;
     * Configuration in ``setup.cfg`` ready to upload package to Pypi;
     * Sample blog application (very very minimalist) fully tested;
     * `Flake8`_ configuration for quality review;
-    * `tox`_ configuration for tests;
+    * `tox`_ configuration for environments tests;
     * Code is fully documented with `reStructuredText`_ and `Napoleon`_
       extension for `Sphinx`_.
     * Release with `twine`_.
 
     Package cover some basic features:
 
+    * A very minimalist Blog application for sample;
     * Basic generic views usage;
     * Testing models, factories and views;
     * pyquery usage for tests on HTML contents;
