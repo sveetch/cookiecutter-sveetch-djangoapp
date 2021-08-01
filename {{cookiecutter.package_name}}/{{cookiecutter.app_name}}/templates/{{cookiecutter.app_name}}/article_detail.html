@@ -3,8 +3,9 @@
 
 {% block app_content %}{% spaceless %}
 <div class="article-detail">
-    <p>{{ blog_object.title }}</p>
-    <h2>{{ article_object.title }}</h2>
+    <p class="blog-title">{{ blog_object.title }}</p>
+    <h2 class="title">{{ article_object.title }}</h2>
+    <p class="publish"><em>{{ article_object.publish_start }}</em></p>
 
     <div class="content">{{ article_object.content }}</div>
 </div>

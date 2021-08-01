@@ -11,6 +11,7 @@
 .. _Read the Docs: https://readthedocs.org/
 .. _reStructuredText: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
 .. _twine: https://twine.readthedocs.io
+.. _Django REST Framework: https://www.django-rest-framework.org/
 
 ==============================
 cookiecutter-sveetch-djangoapp
@@ -24,7 +25,34 @@ any service (state badge, pyup, travis, etc..) except `Read the Docs`_
 link in README.
 
 A sample built from this template is available on repository
-`sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_.
+`sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_. Note than this
+a version with every options enabled, see `Options`_.
+
+Package content
+***************
+
+A Django package with everything to start:
+
+* Development in a Python virtual environment with `virtualenv`_ and `pip`_;
+* Promote Test Driven Development with `Pytest`_;
+* Latest Django versions support;
+* Configuration in ``setup.cfg`` ready to release on Pypi;
+* Clean application structure per model;
+* Sample blog application (very minimalist) with test coverage;
+* Optionnal API with `Django REST Framework`_ with test coverage;
+* `Flake8`_ configuration for quality review;
+* `tox`_ configuration for environments tests;
+* Code is fully documented with `reStructuredText`_ and `Napoleon`_
+  extension for `Sphinx`_.
+* Release with `twine`_.
+
+Package cover some basic features:
+
+* A very minimalist Blog application for sample;
+* Basic generic views usage;
+* Basic API (if enabled) with routers, serializers and viewsets;
+* Testing models, factories and views;
+* pyquery usage for tests on HTML contents;
 
 Usage
 *****
@@ -33,77 +61,68 @@ Just invoke the `Cookiecutter`_ template to create a new project: ::
 
     cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
 
-Package content
-    A Django package with everything to start:
-
-    * Development in a Python virtual environment with `virtualenv`_ and `pip`_;
-    * Promote Test Driven Development with `Pytest`_;
-    * Last Django versions support;
-    * Configuration in ``setup.cfg`` ready to upload package to Pypi;
-    * Sample blog application (very very minimalist) fully tested;
-    * `Flake8`_ configuration for quality review;
-    * `tox`_ configuration for environments tests;
-    * Code is fully documented with `reStructuredText`_ and `Napoleon`_
-      extension for `Sphinx`_.
-    * Release with `twine`_.
-
-    Package cover some basic features:
-
-    * A very minimalist Blog application for sample;
-    * Basic generic views usage;
-    * Testing models, factories and views;
-    * pyquery usage for tests on HTML contents;
-
-About first project install and model migrations
-    Created project have models but no migrations. This is to avoid creating
-    migration for models you will surely change or remove.
-
-    This will result in failures on tests and running application until you
-    have created initial migrations. There is a makefile action for this: ::
-
-        make migrations
-
-    It will automatically search to create new migrations for your application
-    if there is some changes or new models. When done, there is a makefile
-    action to apply new migrations: ::
-
-        make migrate
-
-    So if you just plan to check created package, just performs migration
-    creation. However if you plan to create your own application, create your
-    models and make migrations once finished.
-
-    But remember until you've done migrations, tests will fails.
-
 Package requirements
-    To use it from repository url you just need `Cookiecutter`_.
+--------------------
 
-    Once project is created, you can install it locally with ``make install``
-    from project directory.
+To use it from repository url you just need `Cookiecutter`_ (version 1.6 or 1.7).
 
-    However you can install this cookie locally (to avoid doing request each time
-    you use it), you will need virtualenv, clone it where you want and use its
-    ``make install`` command. Once installed you can create shortcut with a bash
-    alias in your ``.bash_aliases``: ::
+Once project is created, you can install it locally with ``make install``
+from project directory.
 
-        alias cookdjango='/home/your/install/cookiecutter-sveetch-django/.venv/bin/cookiecutter /home/your/install/cookiecutter-sveetch-django'
+However you can install this cookie locally (to avoid doing request each time
+you use it), you will need virtualenv, clone it where you want and use its
+``make install`` command. Once installed you can create shortcut with a bash
+alias in your ``.bash_aliases``: ::
 
-Naming
-    For a given ``Sample bar`` project name:
-
-    * Package name will be ``sample-bar``;
-    * Application name will ``sample_bar``;
-
-    You can change package and application names during project creation.
+    alias cookdjango='/home/your/install/cookiecutter-sveetch-django/.venv/bin/cookiecutter /home/your/install/cookiecutter-sveetch-django'
 
 Options
-    You can define author full name, email, github username, pypi username,
-    version start, package name and package short description.
+-------
 
-    Some of these have a default value filled from a previous value, obviously
-    you can edit it to your own needs.
+You can define author full name, email, github username, pypi username,
+version start, package name and package short description.
 
-    You can pre define some options in your
-    `cookiecutter user configuration <https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html>`_
-    to avoid to input them each time you use this cookie. This is especially
-    recommended for the author and username ones.
+Some of these have a default value filled from a previous value, obviously
+you can edit it to your own needs.
+
+Also there is an option ``enable_drf`` to enabled API feature with Django REST
+framework. This is enabled by default, it expect a ``True`` or ``true`` value, any
+other value will disable feature.
+
+You can pre define some options in your
+`cookiecutter user configuration <https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html>`_
+to avoid to input them each time you use this cookie. This is especially
+recommended for the author and username ones.
+
+About first project install
+---------------------------
+
+Created application have models but no migrations. This is to avoid creating
+migration for models you will surely change or remove.
+
+This will result in failures on tests and running application until you
+have created initial migrations. There is a makefile action for this: ::
+
+    make migrations
+
+It will automatically search to create new migrations for your application
+if there is some changes or new models. When done, there is a makefile
+action to apply new migrations: ::
+
+    make migrate
+
+So if you just plan to check created package, just performs migration
+creation. However if you plan to create your own application, create your
+models and make migrations once finished.
+
+But remember than until you've done migrations, tests will fail.
+
+Naming
+******
+
+For a given ``Sample bar`` project name:
+
+* Package name will be ``sample-bar``;
+* Application name will ``sample_bar``;
+
+You can change package and application names during project creation.

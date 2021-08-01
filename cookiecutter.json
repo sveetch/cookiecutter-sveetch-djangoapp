@@ -8,6 +8,7 @@
     "app_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
 
     "project_short_description": "A Django application package.",
+    "enable_drf": false,
 
     "pypi_username": "{{ cookiecutter.author_username }}",
     "version": "0.1.0"

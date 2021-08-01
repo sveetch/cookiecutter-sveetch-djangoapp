@@ -5,6 +5,7 @@ Article
 
 """
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from django.urls import reverse
 
@@ -43,9 +44,21 @@ class Article(models.Model):
     Optionnal text content.
     """
 
+    publish_start = models.DateTimeField(
+        _("publication start"),
+        db_index=True,
+        default=timezone.now,
+    )
+    """
+    Required publication date determine when article will be available.
+    """
+
     class Meta:
         verbose_name = _("Article")
         verbose_name_plural = _("Articles")
+        ordering = [
+            "-publish_start",
+        ]
 
     def __str__(self):
         return self.title

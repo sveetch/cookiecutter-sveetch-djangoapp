@@ -28,18 +28,18 @@ server.watch(
     )
 )
 
-# Watch application core documents
+# Watch application documents
 server.watch(
-    'docs/core/*.rst',
+    'docs/django_app/*.rst',
     shell(
         'make html',
         cwd='docs'
     )
 )
 
-# Watch root modules for autodoc review from core docs
+# Watch root modules for autodoc review from application documents
 server.watch(
-    '{{ cookiecutter.app_name }}/*.py',
+    '{{ cookiecutter.app_name }}/*/**.py',
     shell(
         'make html',
         cwd='docs'

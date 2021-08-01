@@ -16,13 +16,21 @@ Configuration
 Add it to your installed Django apps in settings : ::
 
     INSTALLED_APPS = (
-        ...
-        '{{ cookiecutter.app_name }}',
+        ...{% if cookiecutter.enable_drf|lower == 'true' %}
+        "rest_framework",{% endif %}
+        "{{ cookiecutter.app_name }}",
     )
 
 Then load default application settings in your settings file: ::
 
     from {{ cookiecutter.app_name }}.settings import *
+
+Then mount applications URLs: ::
+
+    urlpatterns = [
+        ...
+        path("", include("{{ cookiecutter.app_name }}.urls")),
+    ]
 
 And finally apply database migrations.
 

@@ -4,7 +4,7 @@ PYTHON_BIN=$(VENV_PATH)/bin/python
 PIP=$(VENV_PATH)/bin/pip
 
 help:
-	@echo "Please use \`make <target>' where <target> is one of"
+	@echo "Please use 'make <target>' where <target> is one of"
 	@echo
 	@echo "  install             -- to install this project with virtualenv and Pip"
 	@echo ""
@@ -30,14 +30,14 @@ clean-install:
 clean: clean-install clean-pycache
 .PHONY: clean
 
-install: venv
-	$(PIP) install -r requirements/base.txt
-	$(PIP) install -r requirements/dev.txt
-.PHONY: install
-
 venv:
 	virtualenv -p $(PYTHON_INTERPRETER) $(VENV_PATH)
 	# This is required for those ones using old distribution
 	$(PIP) install --upgrade pip
 	$(PIP) install --upgrade setuptools
 .PHONY: venv
+
+install: venv
+	$(PIP) install -r requirements/base.txt
+	$(PIP) install -r requirements/dev.txt
+.PHONY: install

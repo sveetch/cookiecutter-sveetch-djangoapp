@@ -45,9 +45,9 @@ def test_article_detail_content(db, client):
     assert response.status_code == 200
 
     dom = html_pyquery(response)
-    blog_title = dom.find(".article-detail p")
-    article_title = dom.find(".article-detail h2")
-    article_content = dom.find(".article-detail div.content")
+    blog_title = dom.find(".article-detail .blog-title")
+    article_title = dom.find(".article-detail .title")
+    article_content = dom.find(".article-detail .content")
 
     assert blog_title.text() == blog.title
     assert article_title.text() == article.title

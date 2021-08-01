@@ -70,7 +70,7 @@ class FixturesSettingsTestMixin(object):
 @pytest.fixture(scope="session")
 def temp_builds_dir(tmpdir_factory):
     """
-    Shortand to prepare a temporary build directory where to create temporary
+    Shortcut to prepare a temporary build directory where to create temporary
     content from tests.
     """
     fn = tmpdir_factory.mktemp("builds")

@@ -7,4 +7,6 @@ Django application
 .. toctree::
    :maxdepth: 2
 
-   models.rst
+   models.rst{% if cookiecutter.enable_drf|lower == 'true' %}
+   serializers.rst
+   viewsets.rst{% endif %}

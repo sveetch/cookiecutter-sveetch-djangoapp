@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from django.utils import timezone
+
 import factory
 
 from ..models import Article
@@ -16,3 +18,13 @@ class ArticleFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Article
+
+    @factory.lazy_attribute
+    def publish_start(self):
+        """
+        Return current date.
+
+        Returns:
+            datetime.datetime: Current time.
+        """
+        return timezone.now()

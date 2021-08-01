@@ -27,6 +27,9 @@ class Blog(models.Model):
     class Meta:
         verbose_name = _("Blog")
         verbose_name_plural = _("Blogs")
+        ordering = [
+            "title",
+        ]
 
     def __str__(self):
         return self.title
