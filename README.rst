@@ -25,7 +25,7 @@ any service (state badge, pyup, travis, etc..) except `Read the Docs`_
 link in README.
 
 A sample built from this template is available on repository
-`sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_. Note than this
+`sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_. Note that this
 a version with every options enabled, see `Options`_.
 
 Package content
