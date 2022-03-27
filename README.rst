@@ -25,8 +25,9 @@ any service (state badge, pyup, travis, etc..) except `Read the Docs`_
 link in README.
 
 A sample built from this template is available on repository
-`sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_. Note that this
-a version with every options enabled, see `Options`_.
+`sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_.
+Note that this is a version with every options enabled and its version may not always
+match this template current version (mostly if there is no major feature).
 
 Package content
 ***************
@@ -61,10 +62,21 @@ Just invoke the `Cookiecutter`_ template to create a new project: ::
 
     cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
 
+.. warning::
+
+    Django 4.0 support is enabled by default but it drops Python3.7, however you can
+    disable it to keep Python3.7 support, see Options section below for more details.
+
+
 Package requirements
 --------------------
 
-To use it from repository url you just need `Cookiecutter`_ (version 1.6 or 1.7).
+To use it from repository url you just need `Cookiecutter`_ version 1.6 or 1.7.
+
+.. note::
+
+    We are awaiting Cookiecutter 2.x stable release to migrate.
+
 
 Once project is created, you can install it locally with ``make install``
 from project directory.
@@ -85,14 +97,28 @@ version start, package name and package short description.
 Some of these have a default value filled from a previous value, obviously
 you can edit it to your own needs.
 
-Also there is an option ``enable_drf`` to enabled API feature with Django REST
-framework. This is enabled by default, it expect a ``True`` or ``true`` value, any
-other value will disable feature.
-
 You can pre define some options in your
 `cookiecutter user configuration <https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html>`_
 to avoid to input them each time you use this cookie. This is especially
 recommended for the author and username ones.
+
+Special options
+...............
+
+``enable_drf``
+    This is to enable API feature with Django REST framework. It is enabled by default and
+    it expect a ``True`` or ``true`` value, any other value will disable feature.
+
+``django_4_support``
+    This is a new temporary option which is true by default. If you enable it, your
+    project will have Django 4.0 support but this drop Python3.7 support since
+    Django 4.0 does not support it anymore.
+
+    If you need Python3.7, you need to disable this option (answer anything else than
+    ``true``) but obviously you will lose Django 4.0 support.
+
+    This option is temporary and may sooner be removed along Python3.7 support in
+    profit of Django 4.x support.
 
 About first project install
 ---------------------------

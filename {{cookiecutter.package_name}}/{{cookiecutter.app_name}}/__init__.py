@@ -1,6 +1,4 @@
-"""
-{{ cookiecutter.project_short_description|wordwrap(80) }}
-"""
+"""{{ cookiecutter.project_short_description|wordwrap(80) }}"""
 from __future__ import absolute_import, unicode_literals
 
 import os

@@ -2,6 +2,7 @@ VENV_PATH=.venv
 PYTHON_INTERPRETER=python3
 PYTHON_BIN=$(VENV_PATH)/bin/python
 PIP=$(VENV_PATH)/bin/pip
+TOX=$(VENV_PATH)/bin/tox
 TWINE=$(VENV_PATH)/bin/twine
 DJANGO_MANAGE=$(VENV_PATH)/bin/python sandbox/manage.py
 FLAKE=$(VENV_PATH)/bin/flake8
@@ -26,8 +27,9 @@ help:
 	@echo "  clean-pycache       -- to remove all __pycache__, this is recursive from current directory"
 	@echo
 	@echo "  run                 -- to run Django development server"
-	@echo "  migrate             -- to apply demo database migrations"
+	@echo "  check-migrations    -- to check for pending application migrations (do not write anything)"
 	@echo "  migrations          -- to create new migrations for application after changes"
+	@echo "  migrate             -- to apply demo database migrations"
 	@echo "  superuser           -- to create a superuser for Django admin"
 	@echo
 	@echo "  docs                -- to build documentation"
@@ -109,6 +111,13 @@ migrations:
 	@DJANGO_SECRET_KEY=$(DEMO_DJANGO_SECRET_KEY) \
 	$(DJANGO_MANAGE) makemigrations $(APPLICATION_NAME)
 .PHONY: migrations
+
+check-migrations:
+	@echo ""
+	@echo "==== Checking for pending backend model migrations ===="
+	@echo ""
+	$(DJANGO_MANAGE) makemigrations --check --dry-run -v 3 $(APPLICATION_NAME)
+.PHONY: check-migrations
 
 migrate:
 	@echo ""
@@ -201,8 +210,14 @@ check-release: build-package
 	$(TWINE) check dist/*
 .PHONY: check-release
 
+tox:
+	@echo ""
+	@echo "==== Launch tests with Tox environments ===="
+	@echo ""
+	$(TOX)
+.PHONY: tox
 
-quality: test-initial flake docs freeze-dependencies check-release
+quality: test-initial flake check-migrations docs check-release freeze-dependencies
 	@echo ""
 	@echo "♥ ♥ Everything should be fine ♥ ♥"
 	@echo ""
