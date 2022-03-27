@@ -1,7 +1,8 @@
 """
 Pytest fixtures
 """
-import os
+from pathlib import Path
+
 import pytest
 
 import {{ cookiecutter.app_name }}
@@ -13,38 +14,25 @@ class FixturesSettingsTestMixin(object):
     paths which may be used in tests.
 
     Attributes:
-        application_path (str): Absolute path to the application directory.
-        package_path (str): Absolute path to the package directory.
-        tests_dir (str): Directory name which include tests.
-        tests_path (str): Absolute path to the tests directory.
-        fixtures_dir (str): Directory name which include tests datas.
-        fixtures_path (str): Absolute path to the tests datas.
+        application_path (pathlib.Path): Absolute path to the application directory.
+        package_path (pathlib.Path): Absolute path to the package directory.
+        tests_dir (pathlib.Path): Directory name which include tests.
+        tests_path (pathlib.Path): Absolute path to the tests directory.
+        fixtures_dir (pathlib.Path): Directory name which include tests datas.
+        fixtures_path (pathlib.Path): Absolute path to the tests datas.
     """
     def __init__(self):
-        # Base fixture datas directory
-        self.application_path = os.path.abspath(
-            os.path.dirname({{ cookiecutter.app_name }}.__file__)
-        )
-        self.package_path = os.path.normpath(
-            os.path.join(
-                os.path.abspath(
-                    os.path.dirname({{ cookiecutter.app_name }}.__file__)
-                ),
-                "..",
-            )
-        )
+        self.application_path = Path(
+            {{ cookiecutter.app_name }}.__file__
+        ).parents[0].resolve()
+
+        self.package_path = self.application_path.parent
 
         self.tests_dir = "tests"
-        self.tests_path = os.path.join(
-            self.package_path,
-            self.tests_dir,
-        )
+        self.tests_path = self.package_path / self.tests_dir
 
         self.fixtures_dir = "data_fixtures"
-        self.fixtures_path = os.path.join(
-            self.tests_path,
-            self.fixtures_dir
-        )
+        self.fixtures_path = self.tests_path / self.fixtures_dir
 
     def format(self, content):
         """
@@ -57,24 +45,23 @@ class FixturesSettingsTestMixin(object):
             str: Given string formatted with possible values.
         """
         return content.format(
-            HOMEDIR=os.path.expanduser("~"),
-            PACKAGE=self.package_path,
-            APPLICATION=self.application_path,
-            TESTS=self.tests_path,
-            FIXTURES=self.fixtures_path,
+            HOMEDIR=Path.home(),
+            PACKAGE=str(self.package_path),
+            APPLICATION=str(self.application_path),
+            TESTS=str(self.tests_path),
+            FIXTURES=str(self.fixtures_path),
             VERSION={{ cookiecutter.app_name }}.__version__,
-            USER_AGENT={{ cookiecutter.app_name }}.USER_AGENT,
         )
 
 
-@pytest.fixture(scope="session")
-def temp_builds_dir(tmpdir_factory):
+@pytest.fixture(scope="function")
+def temp_builds_dir(tmp_path):
     """
-    Shortcut to prepare a temporary build directory where to create temporary
-    content from tests.
+    Prepare a temporary build directory.
+
+    NOTE: You should use directly the "tmp_path" fixture in your tests.
     """
-    fn = tmpdir_factory.mktemp("builds")
-    return fn
+    return tmp_path
 
 
 @pytest.fixture(scope="module")
@@ -87,6 +74,6 @@ def tests_settings():
 
             def test_foo(tests_settings):
                 print(tests_settings.package_path)
-                print(tests_settings.format("foo: {VERSION}"))
+                print(tests_settings.format("Application version: {VERSION}"))
     """
     return FixturesSettingsTestMixin()
