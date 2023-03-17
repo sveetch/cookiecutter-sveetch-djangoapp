@@ -9,8 +9,9 @@
 
     "project_short_description": "A Django application package.",
     "enable_drf": false,
-    "django_4_support": true,
 
     "pypi_username": "{{ cookiecutter.author_username }}",
-    "version": "0.1.0"
+    "version": "0.1.0",
+
+    "_sveetch_djangoapp_version": "0.5.0"
 }

@@ -34,6 +34,8 @@ Package content
 
 A Django package with everything to start:
 
+* Python>=3.8 support;
+* Django>=3.2 support;
 * Development in a Python virtual environment with `virtualenv`_ and `pip`_;
 * Promote Test Driven Development with `Pytest`_;
 * Latest Django versions support;
@@ -55,6 +57,7 @@ Package cover some basic features:
 * Testing models, factories and views;
 * pyquery usage for tests on HTML contents;
 
+
 Usage
 *****
 
@@ -62,22 +65,17 @@ Just invoke the `Cookiecutter`_ template to create a new project: ::
 
     cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
 
+Once a project is created, you can install it and use it locally with its own Makefile.
+
 
 Package requirements
 --------------------
 
-To use it from repository url you just need `Cookiecutter`_ version 1.6 or 1.7.
-
-.. note::
-
-    We are awaiting Cookiecutter 2.x stable release to migrate.
-
-
-Once project is created, you can install it locally with ``make install``
-from project directory.
+To use this template directly from its repository url you just need
+`Cookiecutter`_>=2.0.
 
 However you can install this cookie locally (to avoid doing request each time
-you use it), you will need virtualenv, clone it where you want and use its
+you use it). You will need virtualenv, clone it where you want and use its
 ``make install`` command. Once installed you can create shortcut with a bash
 alias in your ``.bash_aliases``: ::
 

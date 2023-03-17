@@ -8,12 +8,14 @@
 
 {{ cookiecutter.project_short_description|wordwrap(80) }}
 
+
 Dependancies
 ************
 
 * `Python`_>=3.8;
-* `Django`_>=3.2,<4.1;{% if cookiecutter.enable_drf|lower == 'true' %}
+* `Django`_>=3.2,<4.2;{% if cookiecutter.enable_drf|lower == 'true' %}
 * `Django REST framework`_>=3.13.1;{% endif %}
+
 
 Links
 *****
