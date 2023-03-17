@@ -1,9 +1,3 @@
-"""
-============
-User factory
-============
-
-"""
 import factory
 
 from django.apps import apps

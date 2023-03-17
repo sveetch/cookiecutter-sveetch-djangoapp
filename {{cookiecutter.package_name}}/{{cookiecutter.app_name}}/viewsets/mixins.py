@@ -1,10 +1,3 @@
-"""
-================
-API views mixins
-================
-
-"""
-
 
 class ConditionalResumedSerializerMixin(object):
     """

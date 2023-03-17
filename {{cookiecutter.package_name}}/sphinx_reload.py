@@ -19,25 +19,32 @@ from livereload import Server, shell
 
 server = Server()
 
-# Watch root documents (not recursive)
+# Watch documents
 server.watch(
-    'docs/*.rst',
+    "./README.rst",
     shell(
-        'make html',
-        cwd='docs'
+        "make html",
+        cwd="docs"
     )
 )
 
-# Watch application documents
 server.watch(
-    'docs/django_app/*.rst',
+    "docs/*.rst",
     shell(
-        'make html',
-        cwd='docs'
+        "make html",
+        cwd="docs"
     )
 )
 
-# Watch Python modules for autodoc review
+server.watch(
+    "docs/*/**.rst",
+    shell(
+        "make html",
+        cwd="docs"
+    )
+)
+
+# Watch Python sources
 server.watch(
     "{{ cookiecutter.app_name }}/*.py",
     shell(
@@ -55,7 +62,7 @@ server.watch(
 
 # Serve the builded documentation
 server.serve(
-    root='docs/_build/html',
+    root="docs/_build/html",
     port=8002,
     host="0.0.0.0",
 )

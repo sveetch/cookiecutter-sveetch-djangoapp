@@ -1,6 +1,3 @@
-"""
-Application URLs
-"""
 from django.urls import path{% if cookiecutter.enable_drf|lower == 'true' %}, include{% endif %}
 
 from .views import (

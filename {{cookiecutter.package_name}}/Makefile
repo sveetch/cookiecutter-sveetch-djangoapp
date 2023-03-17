@@ -1,13 +1,18 @@
-VENV_PATH=.venv
 PYTHON_INTERPRETER=python3
+VENV_PATH=.venv
+
+SANDBOX_DIR=sandbox
+STATICFILES_DIR=$(SANDBOX_DIR)/static-sources
+
 PYTHON_BIN=$(VENV_PATH)/bin/python
-PIP=$(VENV_PATH)/bin/pip
-TOX=$(VENV_PATH)/bin/tox
-TWINE=$(VENV_PATH)/bin/twine
-DJANGO_MANAGE=$(VENV_PATH)/bin/python sandbox/manage.py
-FLAKE=$(VENV_PATH)/bin/flake8
-PYTEST=$(VENV_PATH)/bin/pytest
-SPHINX_RELOAD=$(VENV_PATH)/bin/python sphinx_reload.py
+PIP_BIN=$(VENV_PATH)/bin/pip
+TOX_BIN=$(VENV_PATH)/bin/tox
+TWINE_BIN=$(VENV_PATH)/bin/twine
+FLAKE_BIN=$(VENV_PATH)/bin/flake8
+PYTEST_BIN=$(VENV_PATH)/bin/pytest
+
+DJANGO_MANAGE=$(PYTHON_BIN) sandbox/manage.py
+SPHINX_RELOAD=$(PYTHON_BIN) sphinx_reload.py
 
 DEMO_DJANGO_SECRET_KEY=samplesecretfordev
 PACKAGE_NAME={{ cookiecutter.package_name }}
@@ -84,23 +89,23 @@ venv:
 	@echo ""
 	virtualenv -p $(PYTHON_INTERPRETER) $(VENV_PATH)
 	# This is required for those ones using old distribution
-	$(PIP) install --upgrade pip
-	$(PIP) install --upgrade setuptools
+	$(PIP_BIN) install --upgrade pip
+	$(PIP_BIN) install --upgrade setuptools
 .PHONY: venv
 
 create-var-dirs:
 	@mkdir -p var/db
 	@mkdir -p var/static/css
 	@mkdir -p var/media
-	@mkdir -p sandbox/media
-	@mkdir -p sandbox/static/css
+	@mkdir -p $(SANDBOX_DIR)/media
+	@mkdir -p $(STATICFILES_DIR)/css
 .PHONY: create-var-dirs
 
 install: venv create-var-dirs
 	@echo ""
 	@echo "==== Install everything for development ===="
 	@echo ""
-	$(PIP) install -e .[dev]
+	$(PIP_BIN) install -e .[dev,quality,doc,release]
 	${MAKE} migrate
 .PHONY: install
 
@@ -161,15 +166,14 @@ flake:
 	@echo ""
 	@echo "==== Flake ===="
 	@echo ""
-	$(FLAKE) --show-source $(APPLICATION_NAME)
-	$(FLAKE) --show-source tests
+	$(FLAKE_BIN) --statistics --show-source $(APPLICATION_NAME) sandbox tests
 .PHONY: flake
 
 test:
 	@echo ""
 	@echo "==== Tests ===="
 	@echo ""
-	$(PYTEST) -vv --reuse-db tests/
+	$(PYTEST_BIN) -vv --reuse-db tests/
 	rm -Rf var/media-tests/
 .PHONY: test
 
@@ -177,7 +181,7 @@ test-initial:
 	@echo ""
 	@echo "==== Tests from zero ===="
 	@echo ""
-	$(PYTEST) -vv --reuse-db --create-db tests/
+	$(PYTEST_BIN) -vv --reuse-db --create-db tests/
 	rm -Rf var/media-tests/
 .PHONY: test-initial
 
@@ -185,7 +189,7 @@ freeze-dependencies:
 	@echo ""
 	@echo "==== Freeze dependencies versions ===="
 	@echo ""
-	$(VENV_PATH)/bin/python freezer.py
+	$(PYTHON_BIN) freezer.py
 .PHONY: freeze-dependencies
 
 build-package:
@@ -193,28 +197,28 @@ build-package:
 	@echo "==== Build package ===="
 	@echo ""
 	rm -Rf dist
-	$(VENV_PATH)/bin/python setup.py sdist
+	$(PYTHON_BIN) setup.py sdist
 .PHONY: build-package
 
 release: build-package
 	@echo ""
 	@echo "==== Release ===="
 	@echo ""
-	$(TWINE) upload dist/*
+	$(TWINE_BIN) upload dist/*
 .PHONY: release
 
 check-release: build-package
 	@echo ""
 	@echo "==== Check package ===="
 	@echo ""
-	$(TWINE) check dist/*
+	$(TWINE_BIN) check dist/*
 .PHONY: check-release
 
 tox:
 	@echo ""
 	@echo "==== Launch tests with Tox environments ===="
 	@echo ""
-	$(TOX)
+	$(TOX_BIN)
 .PHONY: tox
 
 quality: test-initial flake check-migrations docs check-release freeze-dependencies

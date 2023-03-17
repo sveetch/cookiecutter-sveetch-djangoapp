@@ -11,8 +11,8 @@
 Dependancies
 ************
 
-* `Python`_>={% if cookiecutter.django_4_support|lower == 'true' %}3.7{% else %}3.6{% endif %};
-* `Django`_{% if cookiecutter.django_4_support|lower == 'true' %}>=2.2,<4.1{% else %}>=2.2,<4.0{% endif %};{% if cookiecutter.enable_drf|lower == 'true' %}
+* `Python`_>=3.8;
+* `Django`_>=3.2,<4.1;{% if cookiecutter.enable_drf|lower == 'true' %}
 * `Django REST framework`_>=3.13.1;{% endif %}
 
 Links

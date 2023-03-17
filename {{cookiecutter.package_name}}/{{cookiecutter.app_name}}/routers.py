@@ -1,6 +1,3 @@
-"""
-Application API URLs
-"""
 from rest_framework import routers
 
 from .viewsets import ArticleViewSet, BlogViewSet

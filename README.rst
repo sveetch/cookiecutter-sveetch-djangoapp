@@ -62,11 +62,6 @@ Just invoke the `Cookiecutter`_ template to create a new project: ::
 
     cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
 
-.. warning::
-
-    Django 4.0 support is enabled by default but it drops Python3.7, however you can
-    disable it to keep Python3.7 support, see Options section below for more details.
-
 
 Package requirements
 --------------------
@@ -108,17 +103,6 @@ Special options
 ``enable_drf``
     This is to enable API feature with Django REST framework. It is enabled by default and
     it expect a ``True`` or ``true`` value, any other value will disable feature.
-
-``django_4_support``
-    This is a new temporary option which is true by default. If you enable it, your
-    project will have Django 4.0 support but this drop Python3.7 support since
-    Django 4.0 does not support it anymore.
-
-    If you need Python3.7, you need to disable this option (answer anything else than
-    ``true``) but obviously you will lose Django 4.0 support.
-
-    This option is temporary and may sooner be removed along Python3.7 support in
-    profit of Django 4.x support.
 
 About first project install
 ---------------------------
