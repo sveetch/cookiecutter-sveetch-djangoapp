@@ -1,17 +1,38 @@
 {
+    "project_name": "Project name",
+    "project_short_description": "A Django application package.",
+
+    "enable_drf": false,
+    "init_git_repository": true,
+
     "author_name": "Your name",
     "author_email": "Your email",
     "author_username": "dummy",
+    "pypi_username": "{{ cookiecutter.author_username }}",
 
-    "project_name": "Project name",
     "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
     "app_name": "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}",
+    "__class_name": "{{ cookiecutter.package_name.replace('-', ' ').title().replace(' ', '') }}",
 
-    "project_short_description": "A Django application package.",
-    "enable_drf": false,
-
-    "pypi_username": "{{ cookiecutter.author_username }}",
     "version": "0.1.0",
 
-    "_sveetch_djangoapp_version": "0.5.0"
+    "_sveetch_djangoapp_version": "0.6.0-pre.1",
+
+    "__prompts__": {
+        "project_name": "Input your full project name:",
+        "project_short_description": "Give a short description for this project:",
+
+        "enable_drf": "Do you need an API with DjangoREST framework?",
+        "init_git_repository": "Do you want to init a GIT repository with an initial commit?",
+
+        "author_name": "Author full name:",
+        "author_email": "Author email:",
+        "author_username": "Author username on Github:",
+        "pypi_username": "Author username on PyPi:",
+
+        "package_name": "Customize your package name if needed:",
+        "app_name": "Customize your application module name if needed:",
+
+        "version": "Package will starts in version:"
+    }
 }

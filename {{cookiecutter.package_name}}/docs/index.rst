@@ -1,8 +1,8 @@
 .. include:: ../README.rst
 
 
-User’s Guide
-************
+Contents
+********
 
 .. toctree::
    :maxdepth: 2
@@ -11,7 +11,7 @@ User’s Guide
    django_app/index.rst
 
 
-Developer’s Guide
+About the project
 *****************
 
 .. toctree::
