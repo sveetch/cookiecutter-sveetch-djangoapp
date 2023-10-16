@@ -16,7 +16,7 @@ Configuration
 Add it to your installed Django apps in settings : ::
 
     INSTALLED_APPS = (
-        ...{% if cookiecutter.enable_drf|lower == 'true' %}
+        ...{% if cookiecutter.include_api|lower == 'true' %}
         "rest_framework",{% endif %}
         "{{ cookiecutter.app_name }}",
     )

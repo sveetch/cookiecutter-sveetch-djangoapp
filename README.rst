@@ -98,7 +98,7 @@ recommended for the author and username ones.
 Special options
 ...............
 
-``enable_drf``
+``include_api``
     This is to enable API feature with Django REST framework. It is enabled by default and
     it expect a ``True`` or ``true`` value, any other value will disable feature.
 

@@ -1,5 +1,5 @@
 .. _Python: https://www.python.org/
-.. _Django: https://www.djangoproject.com/{% if cookiecutter.enable_drf|lower == 'true' %}
+.. _Django: https://www.djangoproject.com/{% if cookiecutter.include_api|lower == 'true' %}
 .. _Django REST framework: https://www.django-rest-framework.org/{% endif %}
 
 {{ '=' * cookiecutter.project_name|length }}
@@ -13,8 +13,8 @@ Dependancies
 ************
 
 * `Python`_>=3.8;
-* `Django`_>=3.2,<4.2;{% if cookiecutter.enable_drf|lower == 'true' %}
-* `Django REST framework`_>=3.13.1;{% endif %}
+* `Django`_>=3.2,<4.2;{% if cookiecutter.include_api|lower == 'true' %}
+* `Django REST framework`_>=3.14.0;{% endif %}
 
 
 Links

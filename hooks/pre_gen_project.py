@@ -16,7 +16,7 @@ if not re.match(PACKAGE_REGEX, package_name):
     )
     print(msg.format(module_name))
 
-    # Exit to cancel project
+    # Exit to cancel project creation
     sys.exit(1)
 
 
@@ -27,5 +27,5 @@ if not re.match(MODULE_REGEX, module_name):
     )
     print(msg.format(module_name))
 
-    # Exit to cancel project
+    # Exit to cancel project creation
     sys.exit(1)

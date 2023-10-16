@@ -153,7 +153,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "django.contrib.staticfiles",{% if cookiecutter.enable_drf|lower == 'true' %}
+    "django.contrib.staticfiles",{% if cookiecutter.include_api|lower == 'true' %}
     "rest_framework",{% endif %}
     "{{ cookiecutter.app_name }}",
 ]

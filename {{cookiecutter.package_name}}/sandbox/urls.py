@@ -9,7 +9,7 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path("admin/", admin.site.urls),{% if cookiecutter.enable_drf|lower == 'true' %}
+    path("admin/", admin.site.urls),{% if cookiecutter.include_api|lower == 'true' %}
     path("api-auth/", include("rest_framework.urls")),{% endif %}
     path("", include("{{ cookiecutter.app_name }}.urls")),
 ]

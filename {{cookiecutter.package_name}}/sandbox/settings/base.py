@@ -141,7 +141,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     "django.forms",
-    "{{ cookiecutter.app_name }}.apps.{{ cookiecutter.app_name }}Config",{% if cookiecutter.enable_drf|lower == 'true' %}
+    "{{ cookiecutter.app_name }}.apps.{{ cookiecutter.app_name }}Config",{% if cookiecutter.include_api|lower == 'true' %}
     "rest_framework",{% endif %}
 ]
 
@@ -152,7 +152,7 @@ LOGOUT_REDIRECT_URL = "/"
 # directory, require also 'django.forms' in INSTALLED_APPS
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
-{% if cookiecutter.enable_drf|lower == 'true' %}
+{% if cookiecutter.include_api|lower == 'true' %}
 # Django REST Framework configuration
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
