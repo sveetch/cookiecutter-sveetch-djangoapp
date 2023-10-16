@@ -1,6 +1,7 @@
 PYTHON_INTERPRETER=python3
 VENV_PATH=.venv
 
+FRONTEND_DIR=frontend
 SANDBOX_DIR=sandbox
 STATICFILES_DIR=$(SANDBOX_DIR)/static-sources
 
@@ -11,6 +12,8 @@ PYTEST_BIN=$(VENV_PATH)/bin/pytest
 SPHINX_RELOAD_BIN=$(PYTHON_BIN) docs/sphinx_reload.py
 TOX_BIN=$(VENV_PATH)/bin/tox
 TWINE_BIN=$(VENV_PATH)/bin/twine
+
+DJANGO_MANAGE=$(SANDBOX_DIR)/manage.py
 
 PACKAGE_NAME={{ cookiecutter.package_name }}
 PACKAGE_SLUG={{ cookiecutter.package_name.replace('-', '_') }}
@@ -30,6 +33,7 @@ help:
 	@echo "  ========"
 	@echo
 	@echo "  clean                      -- to clean EVERYTHING (Warning)"
+	@echo "  clean-var                  -- to clean data (uploaded medias, database, etc..)"
 	@echo "  clean-doc                  -- to remove documentation builds"
 	@echo "  clean-install              -- to clean Python side installation"
 	@echo "  clean-pycache              -- to recursively remove all Python cache files"
@@ -46,6 +50,15 @@ help:
 	@echo "  freeze-dependencies        -- to write installed dependencies versions in frozen.txt"
 	@echo "  install                    -- to install this project with virtualenv and Pip"
 	@echo
+	@echo "  Django commands"
+	@echo "  ==============="
+	@echo
+	@echo "  run                        -- to run Django development server"
+	@echo "  check-migrations           -- to check for pending application migrations (do not write anything)"
+	@echo "  migrations                 -- to create new migrations for application after changes"
+	@echo "  migrate                    -- to apply demo database migrations"
+	@echo "  superuser                  -- to create a superuser for Django admin"
+	@echo
 	@echo "  Quality"
 	@echo "  ======="
 	@echo
@@ -53,6 +66,7 @@ help:
 	@echo "  flake                      -- to launch Flake8 checking"
 	@echo "  quality                    -- to launch run quality tasks and checks"
 	@echo "  test                       -- to launch base test suite using Pytest"
+	@echo "  test-initial               -- to launch base test suite using Pytest and re-initialized database"
 	@echo "  tox                        -- to launch tests for every Tox environments"
 	@echo
 	@echo "  Release"
@@ -85,8 +99,23 @@ clean-doc:
 	rm -Rf docs/_build
 .PHONY: clean-doc
 
-clean: clean-doc clean-install clean-pycache
+clean-var:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Clear 'var/' directory <---$(FORMATRESET)\n"
+	@echo ""
+	rm -Rf var
+.PHONY: clean-var
+
+clean: clean-var clean-doc clean-install clean-pycache
 .PHONY: clean
+
+create-var-dirs:
+	@mkdir -p var/db
+	@mkdir -p var/static/css
+	@mkdir -p var/media
+	@mkdir -p $(SANDBOX_DIR)/media
+	@mkdir -p $(STATICFILES_DIR)/css
+.PHONY: create-var-dirs
 
 venv:
 	@echo ""
@@ -99,12 +128,116 @@ venv:
 	#$(PIP_BIN) install --upgrade setuptools
 .PHONY: venv
 
-install: venv
+install-backend:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install everything for development <---$(FORMATRESET)\n"
 	@echo ""
-	$(PIP_BIN) install -e .[dev,quality,doc,doc-live]
+	$(PIP_BIN) install -e .[dev,quality,doc,doc-live,release]
+.PHONY: install-backend
+
+install-frontend:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Installing frontend requirements <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm install
+# 	@mkdir -p $(STATICFILES_DIR)/fonts
+# 	${MAKE} icon-font
+.PHONY: install-frontend
+
+
+install: venv create-var-dirs install-backend migrate
+# install-frontend frontend
 .PHONY: install
+
+check-django:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Running Django System check <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) check
+.PHONY: check-django
+
+migrations:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Making application migrations <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations $(APPLICATION_NAME)
+.PHONY: migrations
+
+check-migrations:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Checking for pending backend model migrations <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check --dry-run -v 3 $(APPLICATION_NAME)
+.PHONY: check-migrations
+
+migrate:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Apply pending migrations <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) migrate
+.PHONY: migrate
+
+superuser:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Create new superuser <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) createsuperuser
+.PHONY: superuser
+
+run:
+	@echo ""
+	@echo "==== Running development server ===="
+	@echo ""
+	$(PYTHON_BIN) $(DJANGO_MANAGE) runserver 0.0.0.0:8001
+.PHONY: run
+
+css:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building CSS for development environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run-script css
+.PHONY: css
+
+watch-sass:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Watching Sass sources for development environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run-script watch-css
+.PHONY: watch-sass
+
+css-prod:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building CSS for production environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run-script css-prod
+.PHONY: css-prod
+
+js:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building distributed Javascript for development environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run js
+.PHONY: js
+
+watch-js:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Watching Javascript sources for development environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run watch-js
+.PHONY: watch-js
+
+js-prod:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building distributed Javascript for production environment <---$(FORMATRESET)\n"
+	@echo ""
+	cd $(FRONTEND_DIR) && npm run js-prod
+.PHONY: js-prod
+
+frontend: css js
+.PHONY: frontend
+
+frontend-prod: css-prod js-prod
+.PHONY: frontend-prod
 
 docs:
 	@echo ""
@@ -132,7 +265,16 @@ test:
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Tests <---$(FORMATRESET)\n"
 	@echo ""
 	$(PYTEST_BIN) -vv tests/
+	rm -Rf var/media-tests/
 .PHONY: test
+
+test-initial:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Tests from zero <---$(FORMATRESET)\n"
+	@echo ""
+	$(PYTEST_BIN) -vv --reuse-db --create-db tests/
+	rm -Rf var/media-tests/
+.PHONY: test-initial
 
 freeze-dependencies:
 	@echo ""
@@ -170,7 +312,7 @@ tox:
 	$(TOX_BIN)
 .PHONY: tox
 
-quality: test flake docs check-release freeze-dependencies
+quality: test-initial flake check-migrations docs check-release freeze-dependencies
 	@echo ""
 	@printf "$(FORMATGREEN)$(FORMATBOLD) ♥ ♥ Everything should be fine ♥ ♥ $(FORMATRESET)\n"
 	@echo ""
