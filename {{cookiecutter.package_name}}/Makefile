@@ -35,7 +35,9 @@ help:
 	@echo "  clean                      -- to clean EVERYTHING (Warning)"
 	@echo "  clean-var                  -- to clean data (uploaded medias, database, etc..)"
 	@echo "  clean-doc                  -- to remove documentation builds"
-	@echo "  clean-install              -- to clean Python side installation"
+	@echo "  clean-backend-install              -- to clean Python side installation"
+	@echo "  clean-frontend-install        -- to clean frontend installation"
+	@echo "  clean-frontend-build          -- to clean frontend built files"
 	@echo "  clean-pycache              -- to recursively remove all Python cache files"
 	@echo
 	@echo "  Documentation"
@@ -84,7 +86,7 @@ clean-pycache:
 	find . -name "*\.pyc"|xargs rm -f
 .PHONY: clean-pycache
 
-clean-install:
+clean-backend-install:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Clear installation <---$(FORMATRESET)\n"
 	@echo ""
@@ -106,7 +108,23 @@ clean-var:
 	rm -Rf var
 .PHONY: clean-var
 
-clean: clean-var clean-doc clean-install clean-pycache
+clean-frontend-build:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Cleaning frontend built files <---$(FORMATRESET)\n"
+	@echo ""
+	rm -Rf $(STATICFILES_DIR)/webpack-stats.json
+	rm -Rf $(STATICFILES_DIR)/css
+	rm -Rf $(STATICFILES_DIR)/js
+.PHONY: clean-frontend-build
+
+clean-frontend-install:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Cleaning frontend install <---$(FORMATRESET)\n"
+	@echo ""
+	rm -Rf $(FRONTEND_DIR)/node_modules
+.PHONY: clean-frontend-install
+
+clean: clean-var clean-doc clean-backend-install clean-frontend-install clean-frontend-build clean-pycache
 .PHONY: clean
 
 create-var-dirs:
@@ -145,8 +163,7 @@ install-frontend:
 .PHONY: install-frontend
 
 
-install: venv create-var-dirs install-backend migrate
-# install-frontend frontend
+install: venv create-var-dirs install-backend migrate install-frontend frontend
 .PHONY: install
 
 check-django:
