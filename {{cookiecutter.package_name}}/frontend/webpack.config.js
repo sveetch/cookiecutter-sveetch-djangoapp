@@ -19,7 +19,8 @@ module.exports = {
     // Built JS files goes into sandbox staticfile directory
     output: {
         path: path.resolve("../sandbox/static-sources/js"),
-        filename: "[name]-[contenthash].js",
+        //filename: "[name]-[contenthash].js",
+        filename: "[name].js",
         publicPath: "/static/js/",
         // Ensure previous bundle builds are cleaned and do not stack forever
         clean: true,
