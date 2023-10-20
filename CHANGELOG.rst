@@ -3,7 +3,7 @@
 Changelog
 =========
 
-Version 0.6.0 - Unreleased
+Version 0.6.0 - 2021/10/20
 --------------------------
 
 This is a major upgrade to improve quality, documentation and package.
