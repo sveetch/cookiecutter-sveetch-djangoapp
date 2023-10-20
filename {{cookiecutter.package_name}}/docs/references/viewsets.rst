@@ -1,4 +1,4 @@
-.. _intro_django-app_viewsets:
+.. _references_viewsets:
 
 ========
 Viewsets

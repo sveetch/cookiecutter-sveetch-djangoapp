@@ -8,7 +8,7 @@
 .. _livereload: https://livereload.readthedocs.io
 .. _twine: https://twine.readthedocs.io
 
-.. _intro_development:
+.. _development_intro:
 
 ===========
 Development
@@ -28,7 +28,7 @@ Development requirements
 Every requirements are available in package extra requirements in section
 ``dev``.
 
-.. _install_development:
+.. _development_install:
 
 Install for development
 ***********************

@@ -8,7 +8,7 @@ Contents
    :maxdepth: 2
 
    install.rst
-   django_app/index.rst
+   references/index.rst
 
 
 About the project

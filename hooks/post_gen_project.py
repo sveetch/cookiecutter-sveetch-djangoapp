@@ -201,8 +201,8 @@ if __name__ == "__main__":
                 "{{ cookiecutter.app_name }}/serializers/",
                 "{{ cookiecutter.app_name }}/viewsets/",
                 "{{ cookiecutter.app_name }}/routers.py",
-                "docs/django_app/serializers.rst",
-                "docs/django_app/viewsets.rst",
+                "docs/references/serializers.rst",
+                "docs/references/viewsets.rst",
                 "tests/100_serializers/",
                 "tests/110_viewsets/",
             ]

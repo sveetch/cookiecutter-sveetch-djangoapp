@@ -1,8 +1,8 @@
-.. _intro_django-app:
+.. _references_intro:
 
-==================
-Django application
-==================
+==========
+References
+==========
 
 .. toctree::
    :maxdepth: 2

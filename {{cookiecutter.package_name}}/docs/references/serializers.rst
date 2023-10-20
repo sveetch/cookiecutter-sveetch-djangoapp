@@ -1,4 +1,4 @@
-.. _intro_django-app_serializers:
+.. _references_serializers:
 
 ===========
 Serializers

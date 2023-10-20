@@ -37,6 +37,7 @@ A Django package with everything to start:
 
 * Python>=3.8 support;
 * Django>=3.2 support;
+* A very helpful Makefile with every tasks you would need to develop your application;
 * Development in a Python virtual environment with `virtualenv`_ and `pip`_;
 * Promote Test Driven Development with `Pytest`_;
 * Latest Django versions support;
