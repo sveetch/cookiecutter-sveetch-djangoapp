@@ -12,6 +12,7 @@
 .. _reStructuredText: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
 .. _twine: https://twine.readthedocs.io
 .. _Django REST Framework: https://www.django-rest-framework.org/
+.. _Bootstrap: https://getbootstrap.com/
 
 ==============================
 cookiecutter-sveetch-djangoapp
@@ -42,7 +43,10 @@ A Django package with everything to start:
 * Configuration in ``setup.cfg`` ready to release on Pypi;
 * Clean application structure per model;
 * Sample blog application (very minimalist) with test coverage;
+* A basic Django project configured in a ``sandbox/`` directory to run and use your
+  application;
 * Optionnal API with `Django REST Framework`_ with test coverage;
+* Optionnal basic frontend for sandbox with `Bootstrap`_;
 * `Flake8`_ configuration for quality review;
 * `tox`_ configuration for environments tests;
 * Code is fully documented with `reStructuredText`_ and `Napoleon`_
@@ -72,7 +76,7 @@ Package requirements
 --------------------
 
 To use this template directly from its repository url you just need
-`Cookiecutter`_>=2.0.
+`Cookiecutter`_>=2.3.0.
 
 However you can install this cookie locally (to avoid doing request each time
 you use it). You will need virtualenv, clone it where you want and use its
@@ -87,20 +91,34 @@ Options
 You can define author full name, email, github username, pypi username,
 version start, package name and package short description.
 
-Some of these have a default value filled from a previous value, obviously
-you can edit it to your own needs.
-
-You can pre define some options in your
+You can pre define some option values in your
 `cookiecutter user configuration <https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html>`_
 to avoid to input them each time you use this cookie. This is especially
-recommended for the author and username ones.
+recommended for the author and username that are pretty common on cookiecutter
+templates.
+
 
 Special options
 ...............
 
+``init_git_repository``
+    If enabled, your new project will be initialized as a Git repository and everything
+    will be added to an initial commit. This is useful to start playing on your new
+    project in a new branch and quickly be able to goes back to initial state.
+
 ``include_api``
     This is to enable API feature with Django REST framework. It is enabled by default and
     it expect a ``True`` or ``true`` value, any other value will disable feature.
+
+``include_frontend``
+    This will include a frontend configuration and structure into the project. Makefile
+    will have some additional tasks to install and build frontend. Sandbox skeleton
+    template will load its CSS and JS assets.
+
+    This is a pretty basic frontend with Node.js, Babel, Webpack, jQuery, Sass compiler
+    and Bootstrap. It will be enough to prototype your layout but you will probably
+    need to improve it yourself for more specific usecases.
+
 
 About first project install
 ---------------------------

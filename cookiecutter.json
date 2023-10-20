@@ -3,6 +3,7 @@
     "project_short_description": "A Django application package.",
 
     "include_api": false,
+    "include_frontend": true,
     "init_git_repository": true,
 
     "author_name": "Your name",
@@ -16,13 +17,14 @@
 
     "version": "0.1.0",
 
-    "_sveetch_djangoapp_version": "0.6.0-pre.3",
+    "_sveetch_djangoapp_version": "0.6.0-pre.4",
 
     "__prompts__": {
         "project_name": "Input your full project name:",
         "project_short_description": "Give a short description for this project:",
 
         "include_api": "Do you need an API with DjangoREST framework?",
+        "include_frontend": "Do you need a basic frontend with Bootstrap?",
         "init_git_repository": "Do you want to init a GIT repository with an initial commit?",
 
         "author_name": "Author full name:",

@@ -28,5 +28,5 @@ This is a major upgrade to improve quality, documentation and package.
   the min and max ones;
 * [template] Fixed ``exceptions.py`` to define class names named from package instead
   of dummy ``MyApp``;
-
-* TODO: Include basic frontend with last Bootstrap;
+* [template] Added new option ``include_frontend`` to include a basic frontend with
+  Bootstrap 5.3.2;

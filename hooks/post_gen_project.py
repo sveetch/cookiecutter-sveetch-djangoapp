@@ -196,7 +196,7 @@ if __name__ == "__main__":
     # NOTE: This need to be updated when adding/moving/removing files related to CLI
     if not context["include_api"]:
         manager.cleaning_files(
-            "Removing CLI files",
+            "Removing API files",
             [
                 "{{ cookiecutter.app_name }}/serializers/",
                 "{{ cookiecutter.app_name }}/viewsets/",
@@ -205,6 +205,14 @@ if __name__ == "__main__":
                 "docs/django_app/viewsets.rst",
                 "tests/100_serializers/",
                 "tests/110_viewsets/",
+            ]
+        )
+
+    if not context["include_frontend"]:
+        manager.cleaning_files(
+            "Removing frontend files",
+            [
+                "frontend/",
             ]
         )
 

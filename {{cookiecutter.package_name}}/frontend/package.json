@@ -1,8 +1,8 @@
 {
     "name": "{{ cookiecutter.project_name }} frontend",
     "version": "{{ cookiecutter.version }}",
-    "description": "The project frontend stack.",
-    "author": "David THENON <sveetch@gmail.com>",
+    "description": "The project frontend.",
+    "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>",
     "private": true,
     "scripts": {
         "css": "sass --load-path=node_modules ./scss:../sandbox/static-sources/css/",

@@ -1,8 +1,8 @@
 PYTHON_INTERPRETER=python3
 VENV_PATH=.venv
 
-FRONTEND_DIR=frontend
-SANDBOX_DIR=sandbox
+{% if cookiecutter.include_frontend %}FRONTEND_DIR=frontend
+{% endif %}SANDBOX_DIR=sandbox
 STATICFILES_DIR=$(SANDBOX_DIR)/static-sources
 
 PYTHON_BIN=$(VENV_PATH)/bin/python
@@ -36,9 +36,9 @@ help:
 	@echo "  clean-var                  -- to clean data (uploaded medias, database, etc..)"
 	@echo "  clean-doc                  -- to remove documentation builds"
 	@echo "  clean-backend-install              -- to clean Python side installation"
-	@echo "  clean-frontend-install        -- to clean frontend installation"
+{% if cookiecutter.include_frontend %}	@echo "  clean-frontend-install        -- to clean frontend installation"
 	@echo "  clean-frontend-build          -- to clean frontend built files"
-	@echo "  clean-pycache              -- to recursively remove all Python cache files"
+{% endif %}	@echo "  clean-pycache              -- to recursively remove all Python cache files"
 	@echo
 	@echo "  Documentation"
 	@echo "  ============="
@@ -61,7 +61,19 @@ help:
 	@echo "  migrate                    -- to apply demo database migrations"
 	@echo "  superuser                  -- to create a superuser for Django admin"
 	@echo
-	@echo "  Quality"
+{% if cookiecutter.include_frontend %}	@echo "  Frontend commands"
+	@echo "  ================="
+	@echo
+	@echo "  css                        -- to build uncompressed CSS from Sass sources"
+	@echo "  watch-css                  -- to watch for Sass changes to rebuild CSS"
+	@echo "  css-prod                   -- to build compressed and minified CSS from Sass sources"
+	@echo "  js                         -- to build uncompressed Javascript from sources"
+	@echo "  watch-js                   -- to watch for Javascript sources changes to rebuild assets"
+	@echo "  js-prod                    -- to build minified JS assets"
+	@echo "  frontend                   -- to build uncompressed frontend assets (CSS, JS, etc..)"
+	@echo "  frontend-prod              -- to build minified frontend assets (CSS, JS, etc..)"
+	@echo
+{% endif %}	@echo "  Quality"
 	@echo "  ======="
 	@echo
 	@echo "  check-release              -- to check package release before uploading it to PyPi"
@@ -108,7 +120,7 @@ clean-var:
 	rm -Rf var
 .PHONY: clean-var
 
-clean-frontend-build:
+{% if cookiecutter.include_frontend %}clean-frontend-build:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Cleaning frontend built files <---$(FORMATRESET)\n"
 	@echo ""
@@ -123,7 +135,7 @@ clean-frontend-install:
 	@echo ""
 	rm -Rf $(FRONTEND_DIR)/node_modules
 .PHONY: clean-frontend-install
-
+{% endif %}
 clean: clean-var clean-doc clean-backend-install clean-frontend-install clean-frontend-build clean-pycache
 .PHONY: clean
 
@@ -153,7 +165,7 @@ install-backend:
 	$(PIP_BIN) install -e .[dev,quality,doc,doc-live,release]
 .PHONY: install-backend
 
-install-frontend:
+{% if cookiecutter.include_frontend %}install-frontend:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Installing frontend requirements <---$(FORMATRESET)\n"
 	@echo ""
@@ -161,9 +173,8 @@ install-frontend:
 # 	@mkdir -p $(STATICFILES_DIR)/fonts
 # 	${MAKE} icon-font
 .PHONY: install-frontend
-
-
-install: venv create-var-dirs install-backend migrate install-frontend frontend
+{% endif %}
+install: venv create-var-dirs install-backend migrate{% if cookiecutter.include_frontend %} install-frontend frontend{% endif %}
 .PHONY: install
 
 check-django:
@@ -208,7 +219,7 @@ run:
 	$(PYTHON_BIN) $(DJANGO_MANAGE) runserver 0.0.0.0:8001
 .PHONY: run
 
-css:
+{% if cookiecutter.include_frontend %}css:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building CSS for development environment <---$(FORMATRESET)\n"
 	@echo ""
@@ -255,7 +266,7 @@ frontend: css js
 
 frontend-prod: css-prod js-prod
 .PHONY: frontend-prod
-
+{% endif %}
 docs:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Build documentation <---$(FORMATRESET)\n"
