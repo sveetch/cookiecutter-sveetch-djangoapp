@@ -3,7 +3,13 @@
 Changelog
 =========
 
-Version 0.6.0 - 2021/10/20
+Version 0.7.0 - Unreleased
+--------------------------
+
+* Fixed package setup that didn't defined keywords with comma separation;
+
+
+Version 0.6.0 - 2023/10/20
 --------------------------
 
 This is a major upgrade to improve quality, documentation and package.
