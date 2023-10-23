@@ -3,7 +3,6 @@ Base Django settings for sandbox
 """
 
 from pathlib import Path
-from os.path import join
 
 
 SECRET_KEY = "***TOPSECRET***"
@@ -113,7 +112,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            join(PROJECT_PATH, "templates"),
+            PROJECT_PATH / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {

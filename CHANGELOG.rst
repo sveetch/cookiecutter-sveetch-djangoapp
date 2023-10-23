@@ -7,6 +7,7 @@ Version 0.7.0 - Unreleased
 --------------------------
 
 * Fixed package setup that didn't defined keywords with comma separation;
+* Fixed base setting ``TEMPLATES`` to use ``Path`` instead of ``os.path.join``;
 
 
 Version 0.6.0 - 2023/10/20
