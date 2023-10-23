@@ -35,9 +35,9 @@ help:
 	@echo "  clean                      -- to clean EVERYTHING (Warning)"
 	@echo "  clean-var                  -- to clean data (uploaded medias, database, etc..)"
 	@echo "  clean-doc                  -- to remove documentation builds"
-	@echo "  clean-backend-install              -- to clean Python side installation"
-{% if cookiecutter.include_frontend %}	@echo "  clean-frontend-install        -- to clean frontend installation"
-	@echo "  clean-frontend-build          -- to clean frontend built files"
+	@echo "  clean-backend-install      -- to clean Python side installation"
+{% if cookiecutter.include_frontend %}	@echo "  clean-frontend-install     -- to clean frontend installation"
+	@echo "  clean-frontend-build       -- to clean frontend built files"
 {% endif %}	@echo "  clean-pycache              -- to recursively remove all Python cache files"
 	@echo
 	@echo "  Documentation"

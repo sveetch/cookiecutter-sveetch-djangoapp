@@ -140,8 +140,7 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.staticfiles",
     "django.forms",
-    "{{ cookiecutter.app_name }}.apps.{{ cookiecutter.app_name }}Config",{% if cookiecutter.include_api|lower == 'true' %}
-    "rest_framework",{% endif %}
+    "{{ cookiecutter.app_name }}.apps.{{ cookiecutter.app_name }}Config",
 ]
 
 LOGIN_REDIRECT_URL = "/"
@@ -152,7 +151,13 @@ LOGOUT_REDIRECT_URL = "/"
 FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 
 {% if cookiecutter.include_api|lower == 'true' %}
-# Django REST Framework configuration
+"""
+Django REST Framework configuration
+"""
+INSTALLED_APPS.extend([
+    "rest_framework",
+])
+
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
@@ -160,6 +165,49 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }{% endif %}
+
+{% if cookiecutter.include_cmsplugin|lower == 'true' %}
+"""
+DjangoCMS configuration
+"""
+
+# Admin style need to be put before Django admin
+INSTALLED_APPS[0:0] = [
+    "djangocms_admin_style",
+]
+
+# Enable CMS required apps
+INSTALLED_APPS.extend([
+    "cms",
+    "treebeard",
+    "menus",
+    "sekizai",
+    "djangocms_text_ckeditor",
+])
+
+# Enable CMS middlewares
+MIDDLEWARE.extend([
+    "cms.middleware.utils.ApphookReloadMiddleware",
+    "cms.middleware.user.CurrentUserMiddleware",
+    "cms.middleware.page.CurrentPageMiddleware",
+    "cms.middleware.toolbar.ToolbarMiddleware",
+    "cms.middleware.language.LanguageCookieMiddleware",
+])
+
+# Required since DjangoCMS 3.7.2
+X_FRAME_OPTIONS = "SAMEORIGIN"
+
+# Enable required cms context processors
+TEMPLATES[0]["OPTIONS"]["context_processors"].extend([
+    "sekizai.context_processors.sekizai",
+    "cms.context_processors.cms_settings",
+])
+
+# Define cms page templates
+CMS_TEMPLATES = [
+    ("pages/default.html", "Default"),
+]
+{% endif %}
 """
 SPECIFIC BASE APPLICATIONS SETTINGS BELOW
 """
