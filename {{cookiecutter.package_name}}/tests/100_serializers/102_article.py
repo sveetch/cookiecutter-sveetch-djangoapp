@@ -30,12 +30,12 @@ def test_article_serialize_single(db):
 
     expected = {
         "id": lorem.id,
-        "url": "/api/articles/{}/".format(lorem.id),
-        "view_url": "/{}/{}/".format(foo.id, lorem.id),
+        "url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(lorem.id),
+        "view_url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/{}/".format(foo.id, lorem.id),
         "blog": {
             "id": foo.id,
-            "url": "/api/blogs/{}/".format(foo.id),
-            "view_url": "/{}/".format(foo.id),
+            "url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
+            "view_url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(foo.id),
             "title": "Foo",
         },
         "title": "Lorem",
@@ -80,12 +80,12 @@ def test_article_serialize_many(db):
     expected = [
         {
             "id": lorem.id,
-            "url": "/api/articles/{}/".format(lorem.id),
-            "view_url": "/{}/{}/".format(foo.id, lorem.id),
+            "url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(lorem.id),
+            "view_url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/{}/".format(foo.id, lorem.id),
             "blog": {
                 "id": foo.id,
-                "url": "/api/blogs/{}/".format(foo.id),
-                "view_url": "/{}/".format(foo.id),
+                "url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
+                "view_url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(foo.id),
                 "title": "Foo",
             },
             "title": "Lorem",
@@ -94,12 +94,12 @@ def test_article_serialize_many(db):
         },
         {
             "id": bonorum.id,
-            "url": "/api/articles/{}/".format(bonorum.id),
-            "view_url": "/{}/{}/".format(bar.id, bonorum.id),
+            "url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(bonorum.id),
+            "view_url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/{}/".format(bar.id, bonorum.id),
             "blog": {
                 "id": bar.id,
-                "url": "/api/blogs/{}/".format(bar.id),
-                "view_url": "/{}/".format(bar.id),
+                "url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(bar.id),
+                "view_url": "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(bar.id),
                 "title": "Bar",
             },
             "title": "Bonorum",

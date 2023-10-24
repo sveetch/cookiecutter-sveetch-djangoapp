@@ -32,19 +32,32 @@ def test_article_viewset_list(db):
 
     # Use test client to get article list
     client = APIClient()
-    response = client.get("/api/articles/", format="json")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/", format="json")
     json_data = response.json()
 
     # Expected payload from JSON response
     expected = [
         {
             "id": bonorum.id,
-            "url": "{}/api/articles/{}/".format(HOSTURL, bonorum.id),
-            "view_url": "{}/{}/{}/".format(HOSTURL, bonorum.blog_id, bonorum.id),
+            "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(
+                HOSTURL,
+                bonorum.id
+            ),
+            "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/{}/".format(
+                HOSTURL,
+                bonorum.blog_id,
+                bonorum.id
+            ),
             "blog": {
                 "id": bonorum.blog_id,
-                "url": "{}/api/blogs/{}/".format(HOSTURL, bonorum.blog_id),
-                "view_url": "{}/{}/".format(HOSTURL, bonorum.blog_id),
+                "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(
+                    HOSTURL,
+                    bonorum.blog_id
+                ),
+                "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(
+                    HOSTURL,
+                    bonorum.blog_id
+                ),
                 "title": bonorum.blog.title,
             },
             "publish_start": bonorum.publish_start.isoformat(),
@@ -52,12 +65,25 @@ def test_article_viewset_list(db):
         },
         {
             "id": lorem.id,
-            "url": "{}/api/articles/{}/".format(HOSTURL, lorem.id),
-            "view_url": "{}/{}/{}/".format(HOSTURL, lorem.blog_id, lorem.id),
+            "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(
+                HOSTURL,
+                lorem.id
+            ),
+            "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/{}/".format(
+                HOSTURL,
+                lorem.blog_id,
+                lorem.id
+            ),
             "blog": {
                 "id": lorem.blog_id,
-                "url": "{}/api/blogs/{}/".format(HOSTURL, lorem.blog_id),
-                "view_url": "{}/{}/".format(HOSTURL, lorem.blog_id),
+                "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(
+                    HOSTURL,
+                    lorem.blog_id
+                ),
+                "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(
+                    HOSTURL,
+                    lorem.blog_id
+                ),
                 "title": lorem.blog.title,
             },
             "publish_start": lorem.publish_start.isoformat(),
@@ -85,7 +111,7 @@ def test_article_viewset_detail(db):
     # Use test client to get article object
     client = APIClient()
     response = client.get(
-        "/api/articles/{}/".format(lorem.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(lorem.id),
         format="json"
     )
     json_data = response.json()
@@ -93,12 +119,25 @@ def test_article_viewset_detail(db):
     # Expected payload from JSON response
     expected = {
         "id": lorem.id,
-        "url": "{}/api/articles/{}/".format(HOSTURL, lorem.id),
-        "view_url": "{}/{}/{}/".format(HOSTURL, lorem.blog_id, lorem.id),
+        "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(
+            HOSTURL,
+            lorem.id
+        ),
+        "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/{}/".format(
+            HOSTURL,
+            lorem.blog_id,
+            lorem.id
+        ),
         "blog": {
             "id": lorem.blog_id,
-            "url": "{}/api/blogs/{}/".format(HOSTURL, lorem.blog_id),
-            "view_url": "{}/{}/".format(HOSTURL, lorem.blog_id),
+            "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(
+                HOSTURL,
+                lorem.blog_id
+            ),
+            "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(
+                HOSTURL,
+                lorem.blog_id
+            ),
             "title": lorem.blog.title,
         },
         "publish_start": lorem.publish_start.isoformat(),
@@ -122,7 +161,7 @@ def test_article_viewset_forbidden(db):
 
     # Try to create a new article
     response = client.post(
-        "/api/articles/",
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/",
         {
             "title": "Ping",
         },
@@ -132,7 +171,7 @@ def test_article_viewset_forbidden(db):
 
     # Try to edit an existing article
     response = client.post(
-        "/api/articles/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(foo.id),
         {
             "title": "Bar",
         },
@@ -142,7 +181,7 @@ def test_article_viewset_forbidden(db):
 
     # Try to delete an existing article
     response = client.delete(
-        "/api/articles/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(foo.id),
         format="json"
     )
     assert response.status_code == 403
@@ -163,7 +202,7 @@ def test_article_viewset_post(db):
     client.force_authenticate(user=user)
 
     # This will fail because of missing required fields
-    response = client.post("/api/articles/", {}, format="json")
+    response = client.post("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/", {}, format="json")
     assert response.status_code == 400
     assert response.json() == {
         "blog_id": ["This field is required."],
@@ -176,7 +215,7 @@ def test_article_viewset_post(db):
         "blog_id": foo.id,
         "content": "Ping pong",
     }
-    response = client.post("/api/articles/", payload, format="json")
+    response = client.post("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/", payload, format="json")
     json_data = response.json()
 
     # Check response status code according to HTTP method
@@ -215,7 +254,7 @@ def test_article_viewset_put(db):
     client = APIClient()
     client.force_authenticate(user=user)
     response = client.put(
-        "/api/articles/{}/".format(lorem.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(lorem.id),
         payload,
         format="json"
     )
@@ -255,7 +294,7 @@ def test_article_viewset_patch(db):
     client = APIClient()
     client.force_authenticate(user=user)
     response = client.patch(
-        "/api/articles/{}/".format(lorem.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(lorem.id),
         payload,
         format="json"
     )
@@ -285,7 +324,7 @@ def test_article_viewset_delete(db):
     # Use test client with authenticated user to create a new article
     client = APIClient()
     client.force_authenticate(user=user)
-    response = client.delete("/api/articles/{}/".format(lorem.id))
+    response = client.delete("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/articles/{}/".format(lorem.id))
 
     # Check response status code according to HTTP method
     assert response.status_code == 204

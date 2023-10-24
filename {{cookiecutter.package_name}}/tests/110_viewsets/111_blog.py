@@ -18,22 +18,34 @@ def test_blog_viewset_list(db):
 
     # Use test client to get blog list
     client = APIClient()
-    response = client.get("/api/blogs/", format="json")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/", format="json")
     json_data = response.json()
 
     # Expected payload from JSON response
     expected = [
         {
             "id": bar.id,
-            "url": "{}/api/blogs/{}/".format(HOSTURL, bar.id),
-            "view_url": "{}/{}/".format(HOSTURL, bar.id),
+            "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(
+                HOSTURL,
+                bar.id
+            ),
+            "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(
+                HOSTURL,
+                bar.id
+            ),
             "title": "Bar",
             "article_count": 0,
         },
         {
             "id": foo.id,
-            "url": "{}/api/blogs/{}/".format(HOSTURL, foo.id),
-            "view_url": "{}/{}/".format(HOSTURL, foo.id),
+            "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(
+                HOSTURL,
+                foo.id
+            ),
+            "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(
+                HOSTURL,
+                foo.id
+            ),
             "title": "Foo",
             "article_count": 0,
         },
@@ -53,7 +65,7 @@ def test_blog_viewset_detail(db):
     # Use test client to get blog object
     client = APIClient()
     response = client.get(
-        "/api/blogs/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
         format="json"
     )
     json_data = response.json()
@@ -61,8 +73,14 @@ def test_blog_viewset_detail(db):
     # Expected payload from JSON response
     expected = {
         "id": foo.id,
-        "url": "{}/api/blogs/{}/".format(HOSTURL, foo.id),
-        "view_url": "{}/{}/".format(HOSTURL, foo.id),
+        "url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(
+            HOSTURL,
+            foo.id
+        ),
+        "view_url": "{}/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{}/".format(
+            HOSTURL,
+            foo.id
+        ),
         "title": "Foo",
         "article_count": 0,
     }
@@ -83,7 +101,7 @@ def test_blog_viewset_forbidden(db):
 
     # Try to create a new blog
     response = client.post(
-        "/api/blogs/",
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/",
         {
             "title": "Ping",
         },
@@ -93,7 +111,7 @@ def test_blog_viewset_forbidden(db):
 
     # Try to edit an existing blog
     response = client.post(
-        "/api/blogs/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
         {
             "title": "Bar",
         },
@@ -103,7 +121,7 @@ def test_blog_viewset_forbidden(db):
 
     # Try to delete an existing blog
     response = client.delete(
-        "/api/blogs/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
         format="json"
     )
     assert response.status_code == 403
@@ -120,7 +138,7 @@ def test_blog_viewset_post(db):
     client = APIClient()
     client.force_authenticate(user=user)
     response = client.post(
-        "/api/blogs/",
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/",
         {
             "title": "Foo",
         },
@@ -150,7 +168,7 @@ def test_blog_viewset_put(db):
     client = APIClient()
     client.force_authenticate(user=user)
     response = client.put(
-        "/api/blogs/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
         {
             "title": "Bar",
         },
@@ -180,7 +198,7 @@ def test_blog_viewset_patch(db):
     client = APIClient()
     client.force_authenticate(user=user)
     response = client.patch(
-        "/api/blogs/{}/".format(foo.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id),
         {
             "title": "Bar",
         },
@@ -209,7 +227,7 @@ def test_blog_viewset_delete(db):
     # Use test client with authenticated user to create a new blog
     client = APIClient()
     client.force_authenticate(user=user)
-    response = client.delete("/api/blogs/{}/".format(foo.id))
+    response = client.delete("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}api/blogs/{}/".format(foo.id))
 
     # Check response status code according to HTTP method
     assert response.status_code == 204

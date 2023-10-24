@@ -15,7 +15,9 @@ def test_basic(db):
     blog.full_clean()
     blog.save()
 
-    url = "/{blog_pk}/".format(blog_pk=blog.id)
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/".format(
+        blog_pk=blog.id,
+    )
 
     assert 1 == Blog.objects.filter(title="Foo").count()
     assert "Foo" == blog.title

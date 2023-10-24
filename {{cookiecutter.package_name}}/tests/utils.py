@@ -15,8 +15,8 @@ from pyquery import PyQuery as pq
 # A dummy password that should pass form validation
 VALID_PASSWORD_SAMPLE = "Azerty12345678"
 
-# This is the common dummy URL which Django REST Framework will use when it does not
-# have any request when it resolve URL to absolute (like from Hyperlinked classes)
+# This is the server name value hardcoded from Django RequestFactory which is used
+# by DRF when building URL in returned payload without given proper request.
 DRF_DUMMY_HOST_URL = "http://testserver"
 
 

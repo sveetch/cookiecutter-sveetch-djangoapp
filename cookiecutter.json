@@ -14,11 +14,11 @@
 
     "package_name": "{{ cookiecutter.project_name.lower() | replace(' ', '-') | slugify }}",
     "app_name": "{{ cookiecutter.project_name.lower() | replace(' ', '_') | slugify | replace('-', '_') }}",
-    "__class_name": "{{ cookiecutter.package_name.title() | replace(' ', '') | slugify }}",
+    "__class_name": "{{ cookiecutter.package_name | replace(' ', '') | slugify | replace('-', '') | title }}",
 
     "version": "0.1.0",
 
-    "_sveetch_djangoapp_version": "0.7.0-pre.3",
+    "_sveetch_djangoapp_version": "0.7.0-pre.6",
 
     "__prompts__": {
         "project_name": "Input your full project name:",

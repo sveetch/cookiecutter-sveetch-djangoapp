@@ -111,6 +111,13 @@ Special options
     This is to enable API feature with Django REST framework. It is enabled by default and
     it expect a ``True`` or ``true`` value, any other value will disable feature.
 
+``include_cmsplugin``
+    This is to enable DjangoCMS configuration and add a plugin for a sample model.
+
+    The application will be slightly different since DjangoCMS involves some
+    additional things to work like i18n url, to be mounted at root of sandbox, a
+    homepage, templates, etc..
+
 ``include_frontend``
     This will include a frontend configuration and structure into the project. Makefile
     will have some additional tasks to install and build frontend. Sandbox skeleton
@@ -153,3 +160,8 @@ For a given ``Sample bar`` project name:
 * Application name will ``sample_bar``;
 
 You can change package and application names during project creation.
+
+Note than if your application name is more than ~10 characters, it is possible you will
+have some Flake reports for too long lines in some code and you will have to fix them
+on your own.
+

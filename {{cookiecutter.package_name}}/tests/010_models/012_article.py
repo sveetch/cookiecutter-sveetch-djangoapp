@@ -5,7 +5,7 @@ import pytest
 from {{ cookiecutter.app_name }}.models import Blog, Article
 
 
-def test_basic(db):
+def test_basic(db, tests_settings):
     """
     Basic model saving with required fields should not fail
     """
@@ -21,9 +21,9 @@ def test_basic(db):
     article.full_clean()
     article.save()
 
-    url = "/{blog_pk}/{article_pk}/".format(
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/{article_pk}/".format(
         blog_pk=blog.id,
-        article_pk=article.id
+        article_pk=article.id,
     )
 
     assert 1 == Article.objects.filter(title="Bar").count()

@@ -4,11 +4,11 @@ from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory
 from {{ cookiecutter.app_name }}.models import Article, Blog
 
 
-def test_blog_index_empty(db, client):
+def test_blog_index_empty(db, client{% if cookiecutter.include_cmsplugin|lower == 'true' %}, cms_homepage{% endif %}):
     """
     Without any existing blog, index view should just return the empty text.
     """
-    response = client.get("/")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}")
 
     assert response.status_code == 200
 
@@ -18,14 +18,14 @@ def test_blog_index_empty(db, client):
     assert "No blogs yet." == content
 
 
-def test_blog_index_basic(db, client):
+def test_blog_index_basic(db, client{% if cookiecutter.include_cmsplugin|lower == 'true' %}, cms_homepage{% endif %}):
     """
     Blog index view should list every blog.
     """
     blog1 = BlogFactory(title="blog1")
     blog2 = BlogFactory(title="blog2")
 
-    response = client.get("/")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}")
 
     assert response.status_code == 200
 
@@ -38,8 +38,8 @@ def test_blog_index_basic(db, client):
     ]
 
     expected_urls = [
-        "/{blog_pk}/".format(blog_pk=blog1.id),
-        "/{blog_pk}/".format(blog_pk=blog2.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/".format(blog_pk=blog1.id),
+        "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/".format(blog_pk=blog2.id),
     ]
 
     assert expected_titles == [item.find("a").text for item in items]
@@ -47,7 +47,7 @@ def test_blog_index_basic(db, client):
     assert expected_urls == [item.find("a").get("href") for item in items]
 
 
-def test_blog_index_pagination(settings, db, client):
+def test_blog_index_pagination(settings, db, client{% if cookiecutter.include_cmsplugin|lower == 'true' %}, cms_homepage{% endif %}):
     """
     Blog index view is paginated from setting limit, not every blog is listed
     on the same page.
@@ -61,7 +61,7 @@ def test_blog_index_pagination(settings, db, client):
     assert blog_total == Blog.objects.all().count()
 
     # First result page
-    response = client.get("/")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}")
     assert response.status_code == 200
 
     dom = html_pyquery(response)
@@ -72,7 +72,7 @@ def test_blog_index_pagination(settings, db, client):
     assert 3 == len(pages)
 
     # Second result page
-    response = client.get("/?page=2")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}?page=2")
     assert response.status_code == 200
 
     dom = html_pyquery(response)
@@ -84,7 +84,7 @@ def test_blog_index_pagination(settings, db, client):
     assert "2" == active.text()
 
     # Third result page
-    response = client.get("/?page=3")
+    response = client.get("/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}?page=3")
 
     assert response.status_code == 200
 
@@ -93,25 +93,25 @@ def test_blog_index_pagination(settings, db, client):
     assert 1 == len(items)
 
 
-def test_blog_detail_404(db, client):
+def test_blog_detail_404(db, client{% if cookiecutter.include_cmsplugin|lower == 'true' %}, cms_homepage{% endif %}):
     """
     Try to reach unexisting blog should return a 404 response.
     """
-    url = "/42/"
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}42/"
 
-    response = client.get(url)
+    response = client.get(url, follow=True)
 
     assert response.status_code == 404
 
 
-def test_blog_detail_no_article(db, client):
+def test_blog_detail_no_article(db, client{% if cookiecutter.include_cmsplugin|lower == 'true' %}, cms_homepage{% endif %}):
     """
     Without any related article, blog detail view should just contains its
     content and return the empty text for article list.
     """
     blog1 = BlogFactory(title="blog1")
 
-    url = "/{blog_pk}/".format(blog_pk=blog1.id)
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/".format(blog_pk=blog1.id)
 
     response = client.get(url)
 
@@ -126,14 +126,14 @@ def test_blog_detail_no_article(db, client):
     assert "No articles yet." == content
 
 
-def test_blog_detail_article_pagination(settings, db, client):
+def test_blog_detail_article_pagination(settings, db, client{% if cookiecutter.include_cmsplugin|lower == 'true' %}, cms_homepage{% endif %}):
     """
     Blog index detail has a paginated list of article and so not every blog
     articles are listed on the same page.
     """
     blog1 = BlogFactory(title="blog1")
 
-    blog_url = "/{blog_pk}/".format(blog_pk=blog1.id)
+    blog_url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/".format(blog_pk=blog1.id)
 
     article_total = (settings.ARTICLE_PAGINATION * 2) + 1
 

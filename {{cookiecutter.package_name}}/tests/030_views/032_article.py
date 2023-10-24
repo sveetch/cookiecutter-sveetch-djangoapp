@@ -3,39 +3,39 @@ from tests.utils import html_pyquery
 from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory
 
 
-def test_article_detail_404(db, client):
+def test_article_detail_404(db, client{% if cookiecutter.include_cmsplugin %}, cms_homepage{% endif %}):
     """
     Try to reach unexisting article should return a 404 response.
     """
     blog1 = BlogFactory(title="blog1")
 
-    url = "/{blog_pk}/1/".format(blog_pk=blog1.id)
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/1/".format(blog_pk=blog1.id)
 
-    response = client.get(url)
+    response = client.get(url, follow=True)
 
     assert response.status_code == 404
 
 
-def test_article_detail_noblog(db, client):
+def test_article_detail_noblog(db, client{% if cookiecutter.include_cmsplugin %}, cms_homepage{% endif %}):
     """
     If required blog ID in url does not exists, article detail should return a
     404 response.
     """
-    url = "/42/1/"
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}42/1/"
 
-    response = client.get(url)
+    response = client.get(url, follow=True)
 
     assert response.status_code == 404
 
 
-def test_article_detail_content(db, client):
+def test_article_detail_content(db, client{% if cookiecutter.include_cmsplugin %}, cms_homepage{% endif %}):
     """
     Article content should be displayed correctly.
     """
     blog = BlogFactory(title="blog1")
     article = ArticleFactory(blog=blog)
 
-    url = "/{blog_pk}/{article_pk}/".format(
+    url = "/{% if cookiecutter.include_cmsplugin %}{{ cookiecutter.app_name }}/{% endif %}{blog_pk}/{article_pk}/".format(
         blog_pk=blog.id,
         article_pk=article.id,
     )

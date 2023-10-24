@@ -13,7 +13,9 @@ TODO
 ....
 
 * Add optional DjangoCMS plugin;
-* Add Makefile tasks for PO and MO;
+* Add Makefile tasks for PO and MO?
+* Add option to use absolute path instead relative path for package module importations
+  (absolute path ease to include module into an existing project);
 
 
 Version 0.6.0 - 2023/10/20
