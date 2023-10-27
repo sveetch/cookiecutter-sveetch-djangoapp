@@ -10,6 +10,8 @@ Version 0.7.0 - Unreleased
 * Fixed base setting ``TEMPLATES`` to use ``Path`` instead of ``os.path.join``;
 * Documentation settings has been moved into sandbox settings modules so it is more
   simple to manage;
+* Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to avoid
+  warning;
 
 TODO
 ....
@@ -23,6 +25,9 @@ TODO
   - [x] Add minimal tests for plugin;
   - [ ] Move tests.utils in {application}/utils/..
 
+* Documentation build on RTD has to be tested since doc settings change and this will
+  need to done on a generated project, so in this cookie sample repo with pre branch
+  to activate etc..;
 * Add option to use absolute path instead relative path for package module importations
   (absolute path ease to include module into an existing project);
 * Add Makefile tasks for PO and MO?
