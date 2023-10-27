@@ -207,29 +207,30 @@ if __name__ == "__main__":
             ]
         )
 
+    # Remove files related to CMS plugin if option to include plugin is disabled
+    if not context["include_cmsplugin"]:
+        manager.cleaning_files(
+            "Removing DjangoCMS plugin files",
+            [
+                "{{cookiecutter.app_name}}/factories/cms.py",
+                "{{cookiecutter.app_name}}/forms/",
+                "{{cookiecutter.app_name}}/plugins/",
+                "{{cookiecutter.app_name}}/cms_plugins.py",
+                "{{cookiecutter.app_name}}/templates/{{cookiecutter.app_name}}/blog_plugin.html",
+                "{{cookiecutter.app_name}}/utils/cms_tests.py",
+                "docs/references/plugins.rst",
+                "sandbox/templates/menus/",
+                "sandbox/templates/pages/",
+                "tests/200_plugins/",
+            ]
+        )
+
     # Remove files related to frontend if option to include frontend is disabled
     if not context["include_frontend"]:
         manager.cleaning_files(
             "Removing frontend files",
             [
                 "frontend/",
-            ]
-        )
-
-    # Remove files related to CMS plugin if option to include plugin is disabled
-    if not context["include_cmsplugin"]:
-        manager.cleaning_files(
-            "Removing DjangoCMS plugin files",
-            [
-                "{{cookiecutter.app_name}}/cms_plugins.py",
-                "{{cookiecutter.app_name}}/factories/cms.py",
-                "{{cookiecutter.app_name}}/forms/",
-                "{{cookiecutter.app_name}}/plugins/",
-                "{{cookiecutter.app_name}}/templates/{{cookiecutter.app_name}}/blog_plugin.html",
-                "{{cookiecutter.app_name}}/utils/cms_tests.py",
-                "sandbox/templates/menus/",
-                "sandbox/templates/pages/",
-                "tests/200_plugins/",
             ]
         )
 

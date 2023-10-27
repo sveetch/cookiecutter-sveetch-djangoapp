@@ -7,6 +7,9 @@ References
 .. toctree::
    :maxdepth: 2
 
-   models.rst{% if cookiecutter.include_api|lower == 'true' %}
-   serializers.rst
+   factories.rst
+   models.rst{% if cookiecutter.include_cmsplugin %}
+   plugins.rst{% endif %}{% if cookiecutter.include_api %}
+   serializers.rst{% endif %}
+   views.rst{% if cookiecutter.include_api %}
    viewsets.rst{% endif %}

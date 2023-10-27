@@ -8,6 +8,9 @@ from cms.models.pluginmodel import CMSPlugin{% endif %}
 class Blog(models.Model):
     """
     A very simple blog to contain articles.
+
+    Attributes:
+        title (models.CharField): Required unique title string.
     """
     title = models.CharField(
         _("title"),
@@ -16,9 +19,6 @@ class Blog(models.Model):
         default="",
         unique=True,
     )
-    """
-    Required unique title string.
-    """
 
     class Meta:
         verbose_name = _("Blog")
@@ -45,15 +45,16 @@ class Blog(models.Model):
 class BlogPluginModel(CMSPlugin):
     """
     Blog plugin model.
+
+    Attributes:
+        blog (models.ForeignKey): Related blog.
+        limit (models.IntegerField): Maximum number of articles to list from a blog.
     """
     blog = models.ForeignKey(
         Blog,
         related_name="blog_plugin",
         on_delete=models.CASCADE
     )
-    """
-    Related blog.
-    """
 
     limit = models.IntegerField(
         _("Article limit"),
@@ -61,9 +62,6 @@ class BlogPluginModel(CMSPlugin):
         default=0,
         help_text=_("Using 0 as limit means no limit.")
     )
-    """
-    Maximum number of articles to list from a blog.
-    """
 
     def __str__(self):
         return self.blog.title

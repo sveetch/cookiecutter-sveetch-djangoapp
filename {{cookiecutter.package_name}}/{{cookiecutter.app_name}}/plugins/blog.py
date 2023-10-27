@@ -20,8 +20,10 @@ class BlogPlugin(CMSPluginBase):
     def render(self, context, instance, placeholder):
         context = super().render(context, instance, placeholder)
 
-        # Limit article queryset if there is any limit upper to zero
+        # Base queryset for blog articles
         articles = instance.blog.article_set.all().order_by("-publish_start", "title")
+
+        # Limit article queryset if there is any limit upper to zero
         if instance.limit:
             articles = articles[0:instance.limit]
 

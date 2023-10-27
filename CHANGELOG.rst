@@ -17,13 +17,7 @@ Version 0.7.0 - Unreleased
 * [template] Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to avoid
   warning;
 * [template] Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
-
-TODO
-....
-
-* Documentation build on RTD has to be tested since doc settings change and this will
-  need to done on a generated project, so in this cookie sample repo with pre branch
-  to activate etc..;
+* [template] Improved References documentation;
 
 
 Version 0.6.0 - 2023/10/20

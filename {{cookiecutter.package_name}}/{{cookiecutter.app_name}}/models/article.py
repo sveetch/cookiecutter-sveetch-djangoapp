@@ -9,15 +9,19 @@ from .blog import Blog
 class Article(models.Model):
     """
     A simple article for a blog.
+
+    Attributes:
+        blog (models.ForeignKey): Required related Blog object.
+        title (models.CharField): Required title string.
+        content (models.TextField): Optionnal text content.
+        publish_start (models.DateTimeField): Required publication date determine
+            when article will be available.
     """
     blog = models.ForeignKey(
         Blog,
         verbose_name="Related blog",
         on_delete=models.CASCADE
     )
-    """
-    Required related blog object.
-    """
 
     title = models.CharField(
         _("title"),
@@ -25,27 +29,18 @@ class Article(models.Model):
         max_length=150,
         default="",
     )
-    """
-    Required title string.
-    """
 
     content = models.TextField(
         _("content"),
         blank=True,
         default="",
     )
-    """
-    Optionnal text content.
-    """
 
     publish_start = models.DateTimeField(
         _("publication start"),
         db_index=True,
         default=timezone.now,
     )
-    """
-    Required publication date determine when article will be available.
-    """
 
     class Meta:
         verbose_name = _("Article")
