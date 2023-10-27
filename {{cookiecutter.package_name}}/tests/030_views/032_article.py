@@ -1,4 +1,4 @@
-from tests.utils import html_pyquery
+from {{ cookiecutter.app_name }}.utils.tests import html_pyquery
 
 from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory
 

@@ -12,6 +12,7 @@ Version 0.7.0 - Unreleased
   simple to manage;
 * Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to avoid
   warning;
+* Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
 
 TODO
 ....
@@ -23,7 +24,8 @@ TODO
   - [x] Add files removing from posthook for when "include plugin" option is disabled;
   - [x] Add basic plugin;
   - [x] Add minimal tests for plugin;
-  - [ ] Move tests.utils in {application}/utils/..
+  - [ ] Generate a project without enabled plugin and make a 'tree' to ensure
+    everything has been removed;
 
 * Documentation build on RTD has to be tested since doc settings change and this will
   need to done on a generated project, so in this cookie sample repo with pre branch

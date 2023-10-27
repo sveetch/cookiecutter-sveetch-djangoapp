@@ -5,7 +5,7 @@ from rest_framework.test import APIClient
 from {{ cookiecutter.app_name }}.factories import BlogFactory, UserFactory
 from {{ cookiecutter.app_name }}.models import Blog
 
-from tests.utils import DRF_DUMMY_HOST_URL as HOSTURL
+from {{ cookiecutter.app_name }}.utils.tests import DRF_DUMMY_HOST_URL as HOSTURL
 
 
 def test_blog_viewset_list(db):

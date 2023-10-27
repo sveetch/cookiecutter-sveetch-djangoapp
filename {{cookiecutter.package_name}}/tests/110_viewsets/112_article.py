@@ -6,10 +6,12 @@ import pytz
 from django.conf import settings
 from rest_framework.test import APIClient
 
-from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory, UserFactory
+from {{ cookiecutter.app_name }}.factories import (
+    ArticleFactory, BlogFactory, UserFactory
+)
 from {{ cookiecutter.app_name }}.models import Article
 
-from tests.utils import DRF_DUMMY_HOST_URL as HOSTURL
+from {{ cookiecutter.app_name }}.utils.tests import DRF_DUMMY_HOST_URL as HOSTURL
 
 
 def test_article_viewset_list(db):

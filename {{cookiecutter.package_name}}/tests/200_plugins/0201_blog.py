@@ -6,8 +6,7 @@ from {{ cookiecutter.app_name }}.factories import (
     ArticleFactory, BlogFactory, BlogPluginModelFactory, UserFactory
 )
 
-# TODO: Move in {application}/utils/
-from tests.utils import html_pyquery
+from {{ cookiecutter.app_name }}.utils.tests import html_pyquery
 
 
 def test_form_view_add(db, client, settings):
@@ -38,11 +37,11 @@ def test_form_view_add(db, client, settings):
         'target_language': 'en',
         'plugin_language': 'en',
     })
+    # print()
+    # print(response.content.decode())
+    # print()
 
     # Expected http success status
-    print()
-    print(response.content.decode())
-    print()
     assert response.status_code == 200
 
     # Parse resulting plugin fields
