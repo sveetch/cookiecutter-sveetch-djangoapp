@@ -216,6 +216,20 @@ if __name__ == "__main__":
             ]
         )
 
+    if not context["include_cmsplugin"]:
+        manager.cleaning_files(
+            "Removing DjangoCMS plugin files",
+            [
+                "{{cookiecutter.package_name}}/tests/200_plugins/0201_blog.py",
+                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/cms_plugins.py",
+                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/forms/__init__.py",
+                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/forms/blog.py",
+                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/plugins/__init__.py",
+                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/plugins/blog.py",
+                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/templates/{{cookiecutter.app_name}}/blog_plugin.html",
+            ]
+        )
+
     # Initialize GIT repository, usually the last task to use
     if context["init_git_repository"]:
         manager.repository_init()

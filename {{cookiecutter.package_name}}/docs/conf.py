@@ -15,8 +15,8 @@ import sys
 
 
 # Settings file required by Django
-sys.path.append(os.path.join(os.path.dirname(__file__), '.'))
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_settings')
+sys.path.append(os.path.join(os.path.dirname(__file__), "."))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sandbox.settings.documentation")
 
 
 # Setup Django
@@ -30,9 +30,9 @@ from {{ cookiecutter.app_name }} import __version__ as {{ cookiecutter.app_name 
 
 # -- Project information -----------------------------------------------------
 
-project = '{{ cookiecutter.package_name }}'
-copyright = '{% now 'local', '%Y' %}, {{ cookiecutter.author_name }}'
-author = '{{ cookiecutter.author_name }}'
+project = "{{ cookiecutter.package_name }}"
+copyright = "{% now "local", "%Y" %}, {{ cookiecutter.author_name }}"
+author = "{{ cookiecutter.author_name }}"
 
 # The short X.Y version
 version = {{ cookiecutter.app_name }}_version
@@ -46,25 +46,25 @@ release = {{ cookiecutter.app_name }}_version
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.autodoc',
-    'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
+    "sphinx.ext.autodoc",
+    "sphinx.ext.viewcode",
+    "sphinx.ext.napoleon",
     "sphinx_copybutton",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = "sphinx"
 
 # Use index.rst as root content doc file
-master_doc = 'index'
+master_doc = "index"
 
 # -- Options for HTML output -------------------------------------------------
 

@@ -22,6 +22,7 @@ class TitleFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = cms_models.Title
+        skip_postgeneration_save = True
 
     @classmethod
     def _after_postgeneration(cls, instance, create, results=None):
@@ -54,6 +55,7 @@ class PageFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = cms_models.Page
         exclude = ["parent", "user"]
+        skip_postgeneration_save = True
 
     @factory.lazy_attribute
     def node(self):

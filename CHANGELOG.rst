@@ -8,14 +8,24 @@ Version 0.7.0 - Unreleased
 
 * Fixed package setup that didn't defined keywords with comma separation;
 * Fixed base setting ``TEMPLATES`` to use ``Path`` instead of ``os.path.join``;
+* Documentation settings has been moved into sandbox settings modules so it is more
+  simple to manage;
 
 TODO
 ....
 
 * Add optional DjangoCMS plugin;
-* Add Makefile tasks for PO and MO?
+
+  - [x] Add DjangoCMS config;
+  - [x] Fixed tests for variance with or without DjangoCMS;
+  - [x] Add files removing from posthook for when "include plugin" option is disabled;
+  - [x] Add basic plugin;
+  - [x] Add minimal tests for plugin;
+  - [ ] Move tests.utils in {application}/utils/..
+
 * Add option to use absolute path instead relative path for package module importations
   (absolute path ease to include module into an existing project);
+* Add Makefile tasks for PO and MO?
 
 
 Version 0.6.0 - 2023/10/20

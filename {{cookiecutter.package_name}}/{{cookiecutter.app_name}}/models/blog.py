@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.urls import reverse
+from django.urls import reverse{% if cookiecutter.include_cmsplugin %}
+
+from cms.models.pluginmodel import CMSPlugin{% endif %}
 
 
 class Blog(models.Model):
@@ -38,3 +40,35 @@ class Blog(models.Model):
         return reverse("{{ cookiecutter.app_name }}:blog-detail", args=[
             str(self.id)
         ])
+
+{% if cookiecutter.include_cmsplugin %}
+class BlogPluginModel(CMSPlugin):
+    """
+    Blog plugin model.
+    """
+    blog = models.ForeignKey(
+        Blog,
+        related_name="blog_plugin",
+        on_delete=models.CASCADE
+    )
+    """
+    Related blog.
+    """
+
+    limit = models.IntegerField(
+        _("Article limit"),
+        blank=False,
+        default=0,
+        help_text=_("Using 0 as limit means no limit.")
+    )
+    """
+    Maximum number of articles to list from a blog.
+    """
+
+    def __str__(self):
+        return self.blog.title
+
+    class Meta:
+        verbose_name = _("Blog plugin")
+        verbose_name_plural = _("Blogs plugins")
+{% endif %}

@@ -1,0 +1,16 @@
+{% raw %}{% load i18n %}
+{% spaceless %}
+<div class="blog-plugin">
+    <h3>Last {{ instance.limit }} articles from '{{ instance.blog.title }}'</h3>
+
+    <ul class="plugin-articles">
+    {% for article in articles %}
+        <li>
+            <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>
+        </li>
+    {% empty %}
+        <li class="empty">{% trans "No articles yet." %}</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endspaceless %}{% endraw %}
