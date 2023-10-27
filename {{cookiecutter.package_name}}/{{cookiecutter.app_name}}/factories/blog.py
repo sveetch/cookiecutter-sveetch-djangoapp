@@ -11,8 +11,8 @@ class BlogFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Blog
-
 {% if cookiecutter.include_cmsplugin %}
+
 class BlogPluginModelFactory(factory.django.DjangoModelFactory):
     """
     Factory to create instance of a BlogPluginModel.

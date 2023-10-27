@@ -6,33 +6,24 @@ Changelog
 Version 0.7.0 - Unreleased
 --------------------------
 
-* Fixed package setup that didn't defined keywords with comma separation;
-* Fixed base setting ``TEMPLATES`` to use ``Path`` instead of ``os.path.join``;
-* Documentation settings has been moved into sandbox settings modules so it is more
-  simple to manage;
-* Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to avoid
+* [cookie] Added a new option ``include_cmsplugin`` to include a minimal DjangoCMS
+  plugin with basic test coverage. This option also involves changes on sandbox to
+  include required DjangoCMS configuration and requirements;
+* [template] Fixed package setup that didn't defined keywords with comma separation;
+* [template] Fixed base setting ``TEMPLATES`` to use ``Path`` instead of
+  ``os.path.join``;
+* [template] Documentation settings has been moved into sandbox settings modules so it
+  is more simple to manage;
+* [template] Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to avoid
   warning;
-* Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
+* [template] Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
 
 TODO
 ....
 
-* Add optional DjangoCMS plugin;
-
-  - [x] Add DjangoCMS config;
-  - [x] Fixed tests for variance with or without DjangoCMS;
-  - [x] Add files removing from posthook for when "include plugin" option is disabled;
-  - [x] Add basic plugin;
-  - [x] Add minimal tests for plugin;
-  - [ ] Generate a project without enabled plugin and make a 'tree' to ensure
-    everything has been removed;
-
 * Documentation build on RTD has to be tested since doc settings change and this will
   need to done on a generated project, so in this cookie sample repo with pre branch
   to activate etc..;
-* Add option to use absolute path instead relative path for package module importations
-  (absolute path ease to include module into an existing project);
-* Add Makefile tasks for PO and MO?
 
 
 Version 0.6.0 - 2023/10/20

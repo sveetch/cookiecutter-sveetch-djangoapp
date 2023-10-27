@@ -193,14 +193,13 @@ if __name__ == "__main__":
     manager = PostGenerationHookManager(Path(".").resolve())
 
     # Remove files related to CLI if option to include CLI is disabled
-    # NOTE: This need to be updated when adding/moving/removing files related to CLI
     if not context["include_api"]:
         manager.cleaning_files(
             "Removing API files",
             [
+                "{{ cookiecutter.app_name }}/routers.py",
                 "{{ cookiecutter.app_name }}/serializers/",
                 "{{ cookiecutter.app_name }}/viewsets/",
-                "{{ cookiecutter.app_name }}/routers.py",
                 "docs/references/serializers.rst",
                 "docs/references/viewsets.rst",
                 "tests/100_serializers/",
@@ -208,6 +207,7 @@ if __name__ == "__main__":
             ]
         )
 
+    # Remove files related to frontend if option to include frontend is disabled
     if not context["include_frontend"]:
         manager.cleaning_files(
             "Removing frontend files",
@@ -216,17 +216,20 @@ if __name__ == "__main__":
             ]
         )
 
+    # Remove files related to CMS plugin if option to include plugin is disabled
     if not context["include_cmsplugin"]:
         manager.cleaning_files(
             "Removing DjangoCMS plugin files",
             [
-                "{{cookiecutter.package_name}}/tests/200_plugins/0201_blog.py",
-                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/cms_plugins.py",
-                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/forms/__init__.py",
-                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/forms/blog.py",
-                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/plugins/__init__.py",
-                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/plugins/blog.py",
-                "{{cookiecutter.package_name}}/{{cookiecutter.app_name}}/templates/{{cookiecutter.app_name}}/blog_plugin.html",
+                "{{cookiecutter.app_name}}/cms_plugins.py",
+                "{{cookiecutter.app_name}}/factories/cms.py",
+                "{{cookiecutter.app_name}}/forms/",
+                "{{cookiecutter.app_name}}/plugins/",
+                "{{cookiecutter.app_name}}/templates/{{cookiecutter.app_name}}/blog_plugin.html",
+                "{{cookiecutter.app_name}}/utils/cms_tests.py",
+                "sandbox/templates/menus/",
+                "sandbox/templates/pages/",
+                "tests/200_plugins/",
             ]
         )
 

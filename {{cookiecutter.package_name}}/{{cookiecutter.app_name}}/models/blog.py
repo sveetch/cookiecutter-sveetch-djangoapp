@@ -40,8 +40,8 @@ class Blog(models.Model):
         return reverse("{{ cookiecutter.app_name }}:blog-detail", args=[
             str(self.id)
         ])
-
 {% if cookiecutter.include_cmsplugin %}
+
 class BlogPluginModel(CMSPlugin):
     """
     Blog plugin model.
