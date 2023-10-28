@@ -60,6 +60,8 @@ help:
 	@echo "  migrations                 -- to create new migrations for application after changes"
 	@echo "  migrate                    -- to apply demo database migrations"
 	@echo "  superuser                  -- to create a superuser for Django admin"
+	@echo "  po                         -- to update every PO files from application for enabled languages"
+	@echo "  mo                         -- to build MO files from application PO files"
 	@echo
 {% if cookiecutter.include_frontend %}	@echo "  Frontend commands"
 	@echo "  ================="
@@ -119,8 +121,8 @@ clean-var:
 	@echo ""
 	rm -Rf var
 .PHONY: clean-var
-
-{% if cookiecutter.include_frontend %}clean-frontend-build:
+{% if cookiecutter.include_frontend %}
+clean-frontend-build:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Cleaning frontend built files <---$(FORMATRESET)\n"
 	@echo ""
@@ -164,14 +166,12 @@ install-backend:
 	@echo ""
 	$(PIP_BIN) install -e .[dev,quality,doc,doc-live,release]
 .PHONY: install-backend
-
-{% if cookiecutter.include_frontend %}install-frontend:
+{% if cookiecutter.include_frontend %}
+install-frontend:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Installing frontend requirements <---$(FORMATRESET)\n"
 	@echo ""
 	cd $(FRONTEND_DIR) && npm install
-# 	@mkdir -p $(STATICFILES_DIR)/fonts
-# 	${MAKE} icon-font
 .PHONY: install-frontend
 {% endif %}
 install: venv create-var-dirs install-backend migrate{% if cookiecutter.include_frontend %} install-frontend frontend{% endif %}
@@ -195,7 +195,8 @@ check-migrations:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Checking for pending backend model migrations <---$(FORMATRESET)\n"
 	@echo ""
-	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check --dry-run -v 3 $(APPLICATION_NAME)
+	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --dry-run -v 3 $(APPLICATION_NAME)
+	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check -v 3 $(APPLICATION_NAME)
 .PHONY: check-migrations
 
 migrate:
@@ -214,12 +215,26 @@ superuser:
 
 run:
 	@echo ""
-	@echo "==== Running development server ===="
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Running development server <---$(FORMATRESET)\n"
 	@echo ""
 	$(PYTHON_BIN) $(DJANGO_MANAGE) runserver 0.0.0.0:8001
 .PHONY: run
 
-{% if cookiecutter.include_frontend %}css:
+po:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Updating PO from application <---$(FORMATRESET)\n"
+	@echo ""
+	@cd $(APPLICATION_NAME); ../$(PYTHON_BIN) ../$(DJANGO_MANAGE) makemessages -a --keep-pot --no-obsolete
+.PHONY: po
+
+mo:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building MO from application <---$(FORMATRESET)\n"
+	@echo ""
+	@cd $(APPLICATION_NAME); ../$(PYTHON_BIN) ../$(DJANGO_MANAGE) compilemessages --verbosity 3
+.PHONY: mo
+{% if cookiecutter.include_frontend %}
+css:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building CSS for development environment <---$(FORMATRESET)\n"
 	@echo ""
@@ -340,7 +355,7 @@ tox:
 	$(TOX_BIN)
 .PHONY: tox
 
-quality: test-initial flake check-migrations docs check-release freeze-dependencies
+quality: check-django check-migrations test-initial flake docs check-release freeze-dependencies
 	@echo ""
 	@printf "$(FORMATGREEN)$(FORMATBOLD) ♥ ♥ Everything should be fine ♥ ♥ $(FORMATRESET)\n"
 	@echo ""

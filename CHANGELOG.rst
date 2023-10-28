@@ -18,6 +18,7 @@ Version 0.7.0 - Unreleased
   warning;
 * [template] Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
 * [template] Improved References documentation;
+* [template] Added Makefile tasks ``po`` and ``mo``;
 
 
 Version 0.6.0 - 2023/10/20
