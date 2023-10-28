@@ -9,13 +9,15 @@ Version 0.7.0 - Unreleased
 * [cookie] Added a new option ``include_cmsplugin`` to include a minimal DjangoCMS
   plugin with basic test coverage. This option also involves changes on sandbox to
   include required DjangoCMS configuration and requirements;
+* [cookie] Added Bash script ``check-all-variant.sh`` that can run a suite of template
+  variants to build and run quality task, this a kind of Tox for the template;
 * [template] Fixed package setup that didn't defined keywords with comma separation;
 * [template] Fixed base setting ``TEMPLATES`` to use ``Path`` instead of
   ``os.path.join``;
 * [template] Documentation settings has been moved into sandbox settings modules so it
   is more simple to manage;
-* [template] Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to avoid
-  warning;
+* [template] Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to
+  avoid warning;
 * [template] Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
 * [template] Improved References documentation;
 * [template] Added Makefile tasks ``po`` and ``mo``;

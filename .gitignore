@@ -1,9 +1,10 @@
 # virtualenv
 .venv
 
-# Packaging
-build
-dist
+# Packaging and builds
+/build
+/dist
+/variants-envs
 *.egg-info
 
 # Byte-compiled / optimized / DLL files
