@@ -3,7 +3,7 @@
 Changelog
 =========
 
-Version 0.7.0 - Unreleased
+Version 0.7.0 - 2023/10/30
 --------------------------
 
 This is a major upgrade to add DjangoCMS plugin option, improve quality and
