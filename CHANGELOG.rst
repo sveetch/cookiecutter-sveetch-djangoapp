@@ -6,11 +6,17 @@ Changelog
 Version 0.7.0 - Unreleased
 --------------------------
 
+This is a major upgrade to add DjangoCMS plugin option, improve quality and
+documentation.
+
+* [cookie] Added documentation;
 * [cookie] Added a new option ``include_cmsplugin`` to include a minimal DjangoCMS
   plugin with basic test coverage. This option also involves changes on sandbox to
   include required DjangoCMS configuration and requirements;
 * [cookie] Added Bash script ``check-all-variant.sh`` that can run a suite of template
   variants to build and run quality task, this a kind of Tox for the template;
+* [cookie] Added Python script ``docs/makefile_parser.py`` to automatize Makefile help
+  texts documentation;
 * [template] Fixed package setup that didn't defined keywords with comma separation;
 * [template] Fixed base setting ``TEMPLATES`` to use ``Path`` instead of
   ``os.path.join``;
@@ -18,7 +24,7 @@ Version 0.7.0 - Unreleased
   is more simple to manage;
 * [template] Added compatibility fix with Django>=4.2 for ``USE_L10N`` in settings to
   avoid warning;
-* [template] Moved ``tests.utils`` to ``APPLICATION.utils.tests``;
+* [template] Moved ``tests.utils`` to ``{{cookiecutter.app_name}}.utils.tests``;
 * [template] Improved References documentation;
 * [template] Added Makefile tasks ``po`` and ``mo``;
 

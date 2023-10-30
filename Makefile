@@ -6,6 +6,8 @@ PIP_BIN=$(VENV_PATH)/bin/pip
 FLAKE_BIN=$(VENV_PATH)/bin/flake8
 PYTEST_BIN=$(VENV_PATH)/bin/pytest
 COOKIECUTTER_BIN=$(VENV_PATH)/bin/cookiecutter
+SPHINX_RELOAD_BIN=$(PYTHON_BIN) docs/sphinx_reload.py
+MAKEFILE_PARSER_BIN=$(PYTHON_BIN) docs/makefile_parser.py
 
 # Formatting variables, FORMATRESET is always to be used last to close formatting
 FORMATBLUE:=$(shell tput setab 4)
@@ -21,6 +23,7 @@ help:
 	@echo "  clean               -- to clean EVERYTHING (Warning)"
 	@echo "  clean-pycache       -- to remove all __pycache__, this is recursive from current directory"
 	@echo "  clean-install       -- to clean Python side installation"
+	@echo "  clean-doc           -- to remove documentation builds"
 	@echo "  clean-dist          -- to remove distributed directory"
 	@echo
 	@echo "  Installation"
@@ -32,6 +35,12 @@ help:
 	@echo "  ====="
 	@echo
 	@echo "  project              -- to create a new project"
+	@echo
+	@echo "  Documentation"
+	@echo "  ============="
+	@echo
+	@echo "  docs                 -- to build documentation"
+	@echo "  livedocs             -- to run livereload server to rebuild documentation on source changes"
 	@echo
 	@echo "  Quality"
 	@echo "  ======="
@@ -56,6 +65,13 @@ clean-install:
 	rm -Rf $(VENV_PATH)
 .PHONY: clean-install
 
+clean-doc:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Clear documentation <---$(FORMATRESET)\n"
+	@echo ""
+	rm -Rf docs/_build
+.PHONY: clean-doc
+
 clean-dist:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Cleaning distributed directory <---$(FORMATRESET)\n"
@@ -63,7 +79,7 @@ clean-dist:
 	rm -Rf dist
 .PHONY: clean-dist
 
-clean: clean-install clean-pycache
+clean: clean-install clean-doc clean-pycache
 .PHONY: clean
 
 venv:
@@ -81,9 +97,23 @@ install: venv
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install everything for development <---$(FORMATRESET)\n"
 	@echo ""
-	$(PIP_BIN) install -r requirements/base.txt
-	$(PIP_BIN) install -r requirements/dev.txt
+	$(PIP_BIN) install -r requirements/dev.txt -r requirements/docs-live.txt
 .PHONY: install
+
+docs:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Building documentation <---$(FORMATRESET)\n"
+	@echo ""
+	$(MAKEFILE_PARSER_BIN) "{{cookiecutter.package_name}}/Makefile" --format rst --destination docs/_static/makefile_help.rst
+	cd docs && make html
+.PHONY: docs
+
+livedocs:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Watching documentation sources <---$(FORMATRESET)\n"
+	@echo ""
+	$(SPHINX_RELOAD_BIN)
+.PHONY: livedocs
 
 project:
 	@echo ""

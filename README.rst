@@ -2,166 +2,41 @@
 .. _Python: https://www.python.org
 .. _virtualenv: https://virtualenv.pypa.io
 .. _pip: https://pip.pypa.io
-.. _Pytest: http://pytest.org
-.. _Napoleon: https://sphinxcontrib-napoleon.readthedocs.org
-.. _Flake8: http://flake8.readthedocs.org
-.. _Sphinx: http://www.sphinx-doc.org
-.. _tox: http://tox.readthedocs.io
-.. _livereload: https://livereload.readthedocs.io
-.. _Read the Docs: https://readthedocs.org/
-.. _reStructuredText: https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html
-.. _twine: https://twine.readthedocs.io
+.. _DjangoCMS: https://docs.django-cms.org/en/latest/
 .. _Django REST Framework: https://www.django-rest-framework.org/
 .. _Bootstrap: https://getbootstrap.com/
 
-==============================
-cookiecutter-sveetch-djangoapp
-==============================
 
-Yet another `Cookiecutter`_ template to produce a repository to start
-a Django application package with Python3.
+===================================
+Cookiecutter for Django application
+===================================
 
-It emphases on simple package with quality and not any relation to
-any service (state badge, pyup, travis, etc..) except `Read the Docs`_
-link in README.
+This a `Cookiecutter`_ template to produce a Django application package.
+
+It emphases on simple application with quality and not any relation to
+any service (state badge, pyup, travis, etc..) except
+`Read the Docs service <https://readthedocs.org/>`_ for documentation publishing.
 
 A sample built from this template is available on repository
 `sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_.
 Note that this is a version with every options enabled and its version may not always
 match this template current version (mostly if there is no major feature).
 
-Package content
-***************
+Feature resume
+**************
 
-A Django package with everything to start:
-
-* Python>=3.8 support;
-* Django>=3.2 support;
-* A very helpful Makefile with every tasks you would need to develop your application;
-* Development in a Python virtual environment with `virtualenv`_ and `pip`_;
-* Promote Test Driven Development with `Pytest`_;
-* Latest Django versions support;
-* Configuration in ``setup.cfg`` ready to release on Pypi;
-* Clean application structure per model;
-* Sample blog application (very minimalist) with test coverage;
-* A basic Django project configured in a ``sandbox/`` directory to run and use your
-  application;
-* Optionnal API with `Django REST Framework`_ with test coverage;
-* Optionnal basic frontend for sandbox with `Bootstrap`_;
-* `Flake8`_ configuration for quality review;
-* `tox`_ configuration for environments tests;
-* Code is fully documented with `reStructuredText`_ and `Napoleon`_
-  extension for `Sphinx`_.
-* Release with `twine`_.
-
-Package cover some basic features:
-
-* A very minimalist Blog application for sample;
-* Basic generic views usage;
-* Basic API (if enabled) with routers, serializers and viewsets;
-* Testing models, factories and views;
-* pyquery usage for tests on HTML contents;
+* Compatibility with last stable versions (Python, Django, etc..);
+* Included basic application ready to run;
+* Enforce good development behaviors;
+* Package ready to release with quality coverage;
+* Optional modern frontend (Node.js, Webpack, Bootstrap);
+* Some optional third party applications available: `DjangoCMS`_, `Django REST Framework`_;
 
 
-Usage
+Links
 *****
 
-Just invoke the `Cookiecutter`_ template to create a new project: ::
-
-    cookiecutter https://github.com/sveetch/cookiecutter-sveetch-djangoapp.git
-
-Once a project is created, you can install it and use it locally with its own Makefile.
-
-
-Package requirements
---------------------
-
-To use this template directly from its repository url you just need
-`Cookiecutter`_>=2.3.0.
-
-However you can install this cookie locally (to avoid doing request each time
-you use it). You will need virtualenv, clone it where you want and use its
-``make install`` command. Once installed you can create shortcut with a bash
-alias in your ``.bash_aliases``: ::
-
-    alias cookdjango='/home/your/install/cookiecutter-sveetch-django/.venv/bin/cookiecutter /home/your/install/cookiecutter-sveetch-django'
-
-Options
--------
-
-You can define author full name, email, github username, pypi username,
-version start, package name and package short description.
-
-You can pre define some option values in your
-`cookiecutter user configuration <https://cookiecutter.readthedocs.io/en/1.7.2/advanced/user_config.html>`_
-to avoid to input them each time you use this cookie. This is especially
-recommended for the author and username that are pretty common on cookiecutter
-templates.
-
-
-Special options
-...............
-
-``init_git_repository``
-    If enabled, your new project will be initialized as a Git repository and everything
-    will be added to an initial commit. This is useful to start playing on your new
-    project in a new branch and quickly be able to goes back to initial state.
-
-``include_api``
-    This is to enable API feature with Django REST framework. It is enabled by default and
-    it expect a ``True`` or ``true`` value, any other value will disable feature.
-
-``include_cmsplugin``
-    This is to enable DjangoCMS configuration and add a plugin for a sample model.
-
-    The application will be slightly different since DjangoCMS involves some
-    additional things to work like i18n url, to be mounted at root of sandbox, a
-    homepage, templates, etc..
-
-``include_frontend``
-    This will include a frontend configuration and structure into the project. Makefile
-    will have some additional tasks to install and build frontend. Sandbox skeleton
-    template will load its CSS and JS assets.
-
-    This is a pretty basic frontend with Node.js, Babel, Webpack, jQuery, Sass compiler
-    and Bootstrap. It will be enough to prototype your layout but you will probably
-    need to improve it yourself for more specific usecases.
-
-
-About first project install
----------------------------
-
-Created application have models but no migrations. This is to avoid creating
-migration for models you will surely change or remove.
-
-This will result in failures on tests and running application until you
-have created initial migrations. There is a makefile action for this: ::
-
-    make migrations
-
-It will automatically search to create new migrations for your application
-if there is some changes or new models. When done, there is a makefile
-action to apply new migrations: ::
-
-    make migrate
-
-So if you just plan to check created package, just performs migration
-creation. However if you plan to create your own application, create your
-models and make migrations once finished.
-
-But remember than until you've done migrations, tests will fail.
-
-Naming
-******
-
-For a given ``Sample bar`` project name:
-
-* Package name will be ``sample-bar``;
-* Application name will ``sample_bar``;
-
-You can change package and application names during project creation.
-
-Note than if your application name is more than ~10 characters, it is possible you will
-have some Flake reports for too long lines in some code and you will have to fix them
-on your own.
+* Read the documentation on `Read the docs <https://cookiecutter-sveetch-djangoapp.readthedocs.io/>`_;
+* Clone it on its `Github repository <https://github.com/sveetch/cookiecutter-sveetch-djangoapp>`_;
+* Built sample on repository `sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_;
 
