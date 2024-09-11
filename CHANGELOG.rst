@@ -9,7 +9,7 @@ Changelog
 * Prefix ``[template]`` is for changes on the application template itself;
 
 
-Version 0.7.1 - Unreleased
+Version 0.7.1 - 2024/09/11
 --------------------------
 
 * [cookie] Added missing credits for SVG repo;

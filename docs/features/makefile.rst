@@ -4,7 +4,7 @@
 Makefile
 ========
 
-A project application includes a Makefile which gather all common tasks you may need
+An application project includes a Makefile which gather all common tasks you may need
 to develop and maintain package.
 
 Use its help to know about every available task: ::

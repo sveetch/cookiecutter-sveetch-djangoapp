@@ -67,15 +67,17 @@ All views are
 because View functions are monolithic and not flexible enough for real life projects.
 
 The Django documentation about Class-based views is complete but can be troubling
-when searching for inheritance and feature methods, so you should bookmark the
+when searching for inheritances and feature methods, so you should bookmark the
 `Class-based view Inspector <https://ccbv.co.uk/>`_ that is very helpful.
 
 
 Models
 ******
 
-Included models are very basic but at least you will notice than all define a
-``get_absolute_url`` that is something you should always define properly in your models.
+Included models are very basic but at least you will notice they all define a
+method ``get_absolute_url()`` that is something you should always define properly in
+your models.
+
 
 Template
 ********

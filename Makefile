@@ -87,10 +87,6 @@ venv:
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install virtual environment <---$(FORMATRESET)\n"
 	@echo ""
 	virtualenv -p $(PYTHON_INTERPRETER) $(VENV_PATH)
-	# Uncomment these two lines if you want development install support on old
-	# distributions (<2020)
-	#$(PIP_BIN) install --upgrade pip
-	#$(PIP_BIN) install --upgrade setuptools
 .PHONY: venv
 
 install: venv
