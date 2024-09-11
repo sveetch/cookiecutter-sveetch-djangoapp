@@ -24,6 +24,8 @@ Version 0.7.1 - Unreleased
 * [template] Fixed application description in its ``__init__.py`` that was using an
   hardcoded text from another existing project instead of cookiecutter variable,
   close issue #15;
+* [template] Fixed 'frontend' Makefile cleaning tasks that were not conditionnated to
+  frontend option, close issue #14;
 
 
 Version 0.7.0 - 2023/10/30

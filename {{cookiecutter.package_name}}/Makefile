@@ -95,6 +95,7 @@ clean-pycache:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Clear Python cache <---$(FORMATRESET)\n"
 	@echo ""
+	rm -Rf .tox
 	rm -Rf .pytest_cache
 	find . -type d -name "__pycache__"|xargs rm -Rf
 	find . -name "*\.pyc"|xargs rm -f
@@ -104,6 +105,7 @@ clean-backend-install:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Clear installation <---$(FORMATRESET)\n"
 	@echo ""
+	rm -Rf dist
 	rm -Rf $(VENV_PATH)
 	rm -Rf $(PACKAGE_SLUG).egg-info
 .PHONY: clean-install
@@ -138,7 +140,7 @@ clean-frontend-install:
 	rm -Rf $(FRONTEND_DIR)/node_modules
 .PHONY: clean-frontend-install
 {% endif %}
-clean: clean-var clean-doc clean-backend-install clean-frontend-install clean-frontend-build clean-pycache
+clean: clean-var clean-doc clean-backend-install{% if cookiecutter.include_frontend %} clean-frontend-install clean-frontend-build{% endif %} clean-pycache
 .PHONY: clean
 
 create-var-dirs:
