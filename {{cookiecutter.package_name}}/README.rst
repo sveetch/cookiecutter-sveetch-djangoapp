@@ -1,6 +1,7 @@
 .. _Python: https://www.python.org/
-.. _Django: https://www.djangoproject.com/{% if cookiecutter.include_api|lower == 'true' %}
-.. _Django REST framework: https://www.django-rest-framework.org/{% endif %}
+.. _Django: https://www.djangoproject.com/{% if cookiecutter.include_api %}
+.. _Django REST framework: https://www.django-rest-framework.org/{% endif %}{% if cookiecutter.include_cmsplugin %}
+.. _DjangoCMS: https://docs.django-cms.org/en/release-3.11.x/{% endif %}
 
 {{ '=' * cookiecutter.project_name|length }}
 {{ cookiecutter.project_name }}
@@ -9,12 +10,13 @@
 {{ cookiecutter.project_short_description|wordwrap(80) }}
 
 
-Dependancies
+Dependencies
 ************
 
 * `Python`_>=3.8;
-* `Django`_>=3.2,<4.2;{% if cookiecutter.include_api|lower == 'true' %}
-* `Django REST framework`_>=3.14.0;{% endif %}
+* `Django`_>=3.2,<4.2;{% if cookiecutter.include_api %}
+* `Django REST framework`_>=3.14.0;{% endif %}{% if cookiecutter.include_cmsplugin %}
+* `DjangoCMS`_>=3.11.0,<4.0;{% endif %}
 
 
 Links

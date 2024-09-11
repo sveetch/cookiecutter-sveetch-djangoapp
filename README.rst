@@ -22,6 +22,7 @@ A sample built from this template is available on repository
 Note that this is a version with every options enabled and its version may not always
 match this template current version (mostly if there is no major feature).
 
+
 Feature resume
 **************
 
@@ -40,3 +41,8 @@ Links
 * Clone it on its `Github repository <https://github.com/sveetch/cookiecutter-sveetch-djangoapp>`_;
 * Built sample on repository `sveetch-djangoapp-sample <https://github.com/sveetch/sveetch-djangoapp-sample>`_;
 
+
+Credits
+*******
+
+Logo vector and icon by `SVG Repo <https://www.svgrepo.com>`_.
