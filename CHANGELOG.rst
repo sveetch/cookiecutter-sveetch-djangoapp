@@ -9,6 +9,12 @@ Changelog
 * Prefix ``[template]`` is for changes on the application template itself;
 
 
+Unreleased developement
+-----------------------
+
+* [cookie] Minor change to upgrade cookie documentation requirements;
+
+
 Version 0.7.1 - 2024/09/11
 --------------------------
 
