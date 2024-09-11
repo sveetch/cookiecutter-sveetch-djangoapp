@@ -2,7 +2,7 @@ include MANIFEST.in
 include LICENCE.txt
 include README.rst
 
-exclude sphinx_reload.py
+exclude docs/sphinx_reload.py
 
 recursive-include {{ cookiecutter.app_name }}/templates *
 recursive-include {{ cookiecutter.app_name }}/static *

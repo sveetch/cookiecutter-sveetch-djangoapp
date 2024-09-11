@@ -3,6 +3,29 @@
 Changelog
 =========
 
+
+* Prefix ``[cookie]`` is for changes related to the cookie repository itself (for
+  management, documentation, developement, etc..);
+* Prefix ``[template]`` is for changes on the application template itself;
+
+
+Version 0.7.1 - Unreleased
+--------------------------
+
+* [cookie] Added missing credits for SVG repo;
+* [template] Changed Pytest configuration so it adopts cleaner options for verbosity
+  output;
+* [template] Removed support for Python<3.9;
+* [template] Removed support for Django<4.2;
+* [template] Added support for Python from 3.9 to 3.11;
+* [template] Added support for Django>=5.0;
+* [template] Pinned various requirement to a minimal version to speed up Pip install;
+* [template] Pinned DjangoCMS below 4.0 since we don't support this major release yet;
+* [template] Fixed application description in its ``__init__.py`` that was using an
+  hardcoded text from another existing project instead of cookiecutter variable,
+  close issue #15;
+
+
 Version 0.7.0 - 2023/10/30
 --------------------------
 

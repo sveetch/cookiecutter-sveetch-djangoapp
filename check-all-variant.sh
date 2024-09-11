@@ -3,10 +3,10 @@
 # #####
 # Build cookie template variants to check for quality.
 #
-# This can be taken as a 'Tox' alike and hardcoded in a bash script.
+# This can be taken as a 'Tox' alike but hardcoded in a bash script.
 #
 # Not all possible variants will be built and checked since something like frontend
-# should not have any impact on backend, so it can only be check twice (disable and
+# should not have any impact on backend, so it can only be checked twice (disabled and
 # enabled).
 # #####
 

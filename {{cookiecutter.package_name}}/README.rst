@@ -13,8 +13,8 @@
 Dependencies
 ************
 
-* `Python`_>=3.8;
-* `Django`_>=3.2,<4.2;{% if cookiecutter.include_api %}
+* `Python`_>=3.9;
+* `Django`_>=4.2,<5.0;{% if cookiecutter.include_api %}
 * `Django REST framework`_>=3.14.0;{% endif %}{% if cookiecutter.include_cmsplugin %}
 * `DjangoCMS`_>=3.11.0,<4.0;{% endif %}
 

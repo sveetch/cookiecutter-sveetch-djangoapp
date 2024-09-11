@@ -1,4 +1,4 @@
-"""A system to compose project parts from applications enabled in a manifest"""
+"""{{ cookiecutter.project_short_description|wordwrap(80) }}"""
 from importlib.metadata import version
 
 
