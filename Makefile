@@ -6,6 +6,7 @@ PIP_BIN=$(VENV_PATH)/bin/pip
 FLAKE_BIN=$(VENV_PATH)/bin/flake8
 PYTEST_BIN=$(VENV_PATH)/bin/pytest
 COOKIECUTTER_BIN=$(VENV_PATH)/bin/cookiecutter
+TOX_BIN=$(VENV_PATH)/bin/tox
 SPHINX_RELOAD_BIN=$(PYTHON_BIN) docs/sphinx_reload.py
 MAKEFILE_PARSER_BIN=$(PYTHON_BIN) docs/makefile_parser.py
 
@@ -47,6 +48,7 @@ help:
 	@echo
 	@echo "  flake8               -- to check codestyle on cookie internals"
 	@echo "  template-flake8      -- to check codestyle on project template (it is expected to fail because of Jinja syntax in some files)"
+	@echo "  tox                  -- to use Tox to create, install and test the cookiecutter with different options"
 	@echo
 
 clean-pycache:
@@ -93,7 +95,7 @@ install: venv
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install everything for development <---$(FORMATRESET)\n"
 	@echo ""
-	$(PIP_BIN) install -r requirements/dev.txt -r requirements/docs-live.txt
+	$(PIP_BIN) install -r requirements/base.txt -r requirements/dev.txt -r requirements/docs.txt -r requirements/docs-live.txt
 .PHONY: install
 
 docs:
@@ -132,3 +134,10 @@ template-flake8:
 	@echo ""
 	@$(FLAKE_BIN) --statistics --show-source \{\{\cookiecutter.project_name\}\}
 .PHONY: template-flake8
+
+tox:
+	@echo ""
+	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Create, install and test project with Tox environments <---$(FORMATRESET)\n"
+	@echo ""
+	$(TOX_BIN) run
+.PHONY: tox

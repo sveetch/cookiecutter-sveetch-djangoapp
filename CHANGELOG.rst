@@ -13,6 +13,8 @@ Unreleased developement
 -----------------------
 
 * [cookie] Minor change to upgrade cookie documentation requirements;
+* [cookie] Adopted Tox for quality control on project generation instead of the shell
+  script ``check-all-variant.sh``;
 
 
 Version 0.7.1 - 2024/09/11
