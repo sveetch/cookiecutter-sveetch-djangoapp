@@ -1,11 +1,10 @@
 import datetime
 
 import pytest
-import pytz
 
-from django.conf import settings
 from rest_framework.test import APIClient
 
+from {{ cookiecutter.app_name }}.compat.import_zoneinfo import ZoneInfo
 from {{ cookiecutter.app_name }}.factories import (
     ArticleFactory, BlogFactory, UserFactory
 )
@@ -14,22 +13,26 @@ from {{ cookiecutter.app_name }}.models import Article
 from {{ cookiecutter.app_name }}.utils.tests import DRF_DUMMY_HOST_URL as HOSTURL
 
 
-def test_article_viewset_list(db):
+def test_article_viewset_list(db, settings):
     """
     Read response from API viewset list.
     """
-    default_tz = pytz.timezone(settings.TIME_ZONE)
+    default_tz = ZoneInfo(settings.TIME_ZONE)
 
     # Create some articles
     lorem = ArticleFactory(
         title="Lorem",
         content="Ipsume salace nec vergiture",
-        publish_start=default_tz.localize(datetime.datetime(2012, 10, 15, 12, 00)),
+        publish_start=datetime.datetime(2012, 10, 15, 12, 00).replace(
+            tzinfo=default_tz
+        ),
     )
     bonorum = ArticleFactory(
         title="Bonorum",
         content="Sed ut perspiciatis unde",
-        publish_start=default_tz.localize(datetime.datetime(2021, 8, 7, 15, 30)),
+        publish_start=datetime.datetime(2021, 8, 7, 15, 30).replace(
+            tzinfo=default_tz
+        ),
     )
 
     # Use test client to get article list
@@ -97,17 +100,19 @@ def test_article_viewset_list(db):
     assert expected == json_data
 
 
-def test_article_viewset_detail(db):
+def test_article_viewset_detail(db, settings):
     """
     Read response from API viewset detail.
     """
-    default_tz = pytz.timezone(settings.TIME_ZONE)
+    default_tz = ZoneInfo(settings.TIME_ZONE)
 
     # Create article object
     lorem = ArticleFactory(
         title="Lorem",
         content="Ipsume salace nec vergiture",
-        publish_start=default_tz.localize(datetime.datetime(2012, 10, 15, 12, 00)),
+        publish_start=datetime.datetime(2012, 10, 15, 12, 00).replace(
+            tzinfo=default_tz
+        ),
     )
 
     # Use test client to get article object
@@ -231,11 +236,11 @@ def test_article_viewset_post(db):
     assert payload["content"] == article.content
 
 
-def test_article_viewset_put(db):
+def test_article_viewset_put(db, settings):
     """
     Edit an existing article with HTTP PUT method.
     """
-    default_tz = pytz.timezone(settings.TIME_ZONE)
+    default_tz = ZoneInfo(settings.TIME_ZONE)
 
     # Use a superuser to not bother with permissions
     user = UserFactory(flag_is_superuser=True)
@@ -244,7 +249,9 @@ def test_article_viewset_put(db):
     lorem = ArticleFactory(
         title="Lorem",
         content="Ipsume salace nec vergiture",
-        publish_start=default_tz.localize(datetime.datetime(2012, 10, 15, 12, 00)),
+        publish_start=datetime.datetime(2012, 10, 15, 12, 00).replace(
+            tzinfo=default_tz
+        ),
     )
 
     # Use test client with authenticated user to create a new article
@@ -273,11 +280,11 @@ def test_article_viewset_put(db):
     assert payload["content"] == article.content
 
 
-def test_article_viewset_patch(db):
+def test_article_viewset_patch(db, settings):
     """
     Edit an existing article with HTTP PATCH method.
     """
-    default_tz = pytz.timezone(settings.TIME_ZONE)
+    default_tz = ZoneInfo(settings.TIME_ZONE)
 
     # Use a superuser to not bother with permissions
     user = UserFactory(flag_is_superuser=True)
@@ -286,7 +293,9 @@ def test_article_viewset_patch(db):
     lorem = ArticleFactory(
         title="Lorem",
         content="Ipsume salace nec vergiture",
-        publish_start=default_tz.localize(datetime.datetime(2012, 10, 15, 12, 00)),
+        publish_start=datetime.datetime(2012, 10, 15, 12, 00).replace(
+            tzinfo=default_tz
+        ),
     )
 
     # Use test client with authenticated user to create a new article

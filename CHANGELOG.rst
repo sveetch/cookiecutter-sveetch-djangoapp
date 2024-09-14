@@ -15,6 +15,10 @@ Unreleased developement
 * [cookie] Minor change to upgrade cookie documentation requirements;
 * [cookie] Adopted Tox for quality control on project generation instead of the shell
   script ``check-all-variant.sh``;
+* [cookie] Added ``compat`` module with some compatibility wrappers (currently with
+  default storage class and ZoneInfo);
+* [cookie] Fixed Makefile task ``project`` that was using a wrong cookie path;
+* [cookie] Fixed tests that were using removed Pytz in profit of ZoneInfo;
 
 
 Version 0.7.1 - 2024/09/11

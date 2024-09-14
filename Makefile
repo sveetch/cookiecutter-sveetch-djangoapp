@@ -118,7 +118,7 @@ project:
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Creating new project <---$(FORMATRESET)\n"
 	@echo ""
 	@mkdir -p dist
-	@$(COOKIECUTTER_BIN) -o dist https://github.com/sveetch/cookiecutter-sveetch-python
+	@$(COOKIECUTTER_BIN) -o dist .
 .PHONY: project
 
 flake8:

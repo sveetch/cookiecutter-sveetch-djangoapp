@@ -1,18 +1,15 @@
 import datetime
 
-import pytz
-
-from django.conf import settings
-
+from {{ cookiecutter.app_name }}.compat.import_zoneinfo import ZoneInfo
 from {{ cookiecutter.app_name }}.factories import ArticleFactory, BlogFactory
 from {{ cookiecutter.app_name }}.serializers import ArticleSerializer
 
 
-def test_article_serialize_single(db):
+def test_article_serialize_single(db, settings):
     """
     Single object serialization.
     """
-    default_tz = pytz.timezone(settings.TIME_ZONE)
+    default_tz = ZoneInfo(settings.TIME_ZONE)
 
     # Create blog
     foo = BlogFactory(title="Foo")
@@ -22,7 +19,9 @@ def test_article_serialize_single(db):
         blog=foo,
         title="Lorem",
         content="Ipsume salace nec vergiture",
-        publish_start=default_tz.localize(datetime.datetime(2012, 10, 15, 12, 00)),
+        publish_start=datetime.datetime(2012, 10, 15, 12, 00).replace(
+            tzinfo=default_tz
+        ),
     )
 
     # Serialize article
@@ -46,11 +45,11 @@ def test_article_serialize_single(db):
     assert expected == serializer.data
 
 
-def test_article_serialize_many(db):
+def test_article_serialize_many(db, settings):
     """
     Many objects serialization.
     """
-    default_tz = pytz.timezone(settings.TIME_ZONE)
+    default_tz = ZoneInfo(settings.TIME_ZONE)
 
     # Create some blogs
     foo = BlogFactory(title="Foo")
@@ -61,13 +60,17 @@ def test_article_serialize_many(db):
         blog=foo,
         title="Lorem",
         content="Ipsume salace nec vergiture",
-        publish_start=default_tz.localize(datetime.datetime(2012, 10, 15, 12, 00)),
+        publish_start=datetime.datetime(2012, 10, 15, 12, 00).replace(
+            tzinfo=default_tz
+        ),
     )
     bonorum = ArticleFactory(
         blog=bar,
         title="Bonorum",
         content="Sed ut perspiciatis unde",
-        publish_start=default_tz.localize(datetime.datetime(2021, 8, 7, 15, 30)),
+        publish_start=datetime.datetime(2021, 8, 7, 15, 30).replace(
+            tzinfo=default_tz
+        ),
     )
 
     # Serialize articles
