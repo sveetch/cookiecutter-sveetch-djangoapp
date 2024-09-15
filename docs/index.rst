@@ -14,7 +14,7 @@ Summary
    history.rst
 
 .. toctree::
-   :caption: Application features
+   :caption: Application content
    :maxdepth: 3
 
    features/makefile.rst

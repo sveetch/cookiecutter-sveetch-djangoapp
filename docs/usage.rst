@@ -63,8 +63,10 @@ So you will just have to execute following command to create a new project: ::
     cookdjangoapp
 
 
-About first project install
-***************************
+.. _usage_initial_migration:
+
+Initial model migrations
+************************
 
 Created application will have models but no migrations. This is to avoid creating
 migration for models you will surely change or remove.
@@ -86,7 +88,7 @@ to check created package, you can use the following commands: ::
     make install migrations quality
     make migrate
 
-Don't merge the line within the first one, it won't work.
+Don't merge the second line within the first one, it won't work.
 
 .. Hint::
     If you plan to create your own application models, you will create them and

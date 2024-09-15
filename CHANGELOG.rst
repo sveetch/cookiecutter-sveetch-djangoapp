@@ -19,6 +19,7 @@ Unreleased developement
   default storage class and ZoneInfo);
 * [cookie] Fixed Makefile task ``project`` that was using a wrong cookie path;
 * [cookie] Fixed tests that were using removed Pytz in profit of ZoneInfo;
+* [cookie] Updated documentation;
 
 
 Version 0.7.1 - 2024/09/11

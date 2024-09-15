@@ -1,7 +1,3 @@
-.. Attention::
-
-    We are currently working to finish this documentation.
-
 .. _features_django_intro:
 
 ======
@@ -77,6 +73,31 @@ Models
 Included models are very basic but at least you will notice they all define a
 method ``get_absolute_url()`` that is something you should always define properly in
 your models.
+
+Models migrations
+*****************
+
+.. Attention::
+    Remember that your application has been generated without any initial migration,
+    see :ref:`usage_initial_migration`.
+
+**Don't mess with your model migrations**, they are mandatory and must always be
+synchronized with your last model changes. You can easily check about them with a
+simple task: ::
+
+    make check-migrations
+
+Create the pending ones: ::
+
+    make migrations
+
+And finally apply them to your local deployment: ::
+
+    make migrate
+
+Until you did not released anything, you are allowed to reboot your initial migrations
+becaused this may be needed during application prototyping. But be aware once you
+released something, you can not alter any existing migrations.
 
 
 Template
