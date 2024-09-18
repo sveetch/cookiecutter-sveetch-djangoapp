@@ -9,8 +9,8 @@ Changelog
 * Prefix ``[template]`` is for changes on the application template itself;
 
 
-Unreleased developement
------------------------
+Version 0.7.2 - 2024/09/18
+--------------------------
 
 * [cookie] Minor change to upgrade cookie documentation requirements;
 * [cookie] Adopted Tox for quality control on project generation instead of the shell
