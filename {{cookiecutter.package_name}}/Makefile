@@ -156,10 +156,6 @@ venv:
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Install virtual environment <---$(FORMATRESET)\n"
 	@echo ""
 	virtualenv -p $(PYTHON_INTERPRETER) $(VENV_PATH)
-	# Uncomment these two lines if you want development install support on old
-	# distributions (<2020)
-	#$(PIP_BIN) install --upgrade pip
-	#$(PIP_BIN) install --upgrade setuptools
 .PHONY: venv
 
 install-backend:
@@ -325,7 +321,7 @@ freeze-dependencies:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Freeze dependencies versions <---$(FORMATRESET)\n"
 	@echo ""
-	$(VENV_PATH)/bin/python freezer.py
+	$(VENV_PATH)/bin/python freezer.py ${PACKAGE_NAME} --destination=frozen.txt
 .PHONY: freeze-dependencies
 
 build-package:

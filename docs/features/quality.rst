@@ -34,3 +34,12 @@ The included and configured tools are:
 * `Tox`_ a powerful tool to launch your quality tasks in various environment. It is
   commonly used to launch your quality task suite before submitting something new and
   ensure it works on everything you support like Python or Django multiple versions;
+
+Finally a Makefile task ``quality`` is included and is a meta task that gather all
+other quality task like test, flake, migration checking, release check and
+dependencies freeze.
+
+The dependencies freeze build a ``frozen.txt`` file which contains all dependency
+versions for your requirements defined in ``setup.cfg``, it can help developers to find
+package versions that are ensured to work in case of conflict with other packages
+requirements.

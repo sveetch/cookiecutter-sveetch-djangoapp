@@ -20,6 +20,8 @@ Unreleased developement
 * [cookie] Fixed Makefile task ``project`` that was using a wrong cookie path;
 * [cookie] Fixed tests that were using removed Pytz in profit of ZoneInfo;
 * [cookie] Updated documentation;
+* [template] Updated included script ``freezer.py`` to use ``importlib.metadata``
+  instead of deprecated ``pkg_resources``;
 
 
 Version 0.7.1 - 2024/09/11
