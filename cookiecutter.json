@@ -18,7 +18,7 @@
 
     "version": "0.1.0",
 
-    "_sveetch_djangoapp_version": "0.7.2-pre.5",
+    "_sveetch_djangoapp_version": "0.7.2-pre.6",
 
     "__prompts__": {
         "project_name": "Input your full project name:",
