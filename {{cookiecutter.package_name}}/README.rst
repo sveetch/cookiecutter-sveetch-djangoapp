@@ -1,7 +1,7 @@
 .. _Python: https://www.python.org/
 .. _Django: https://www.djangoproject.com/{% if cookiecutter.include_api %}
 .. _Django REST framework: https://www.django-rest-framework.org/{% endif %}{% if cookiecutter.include_cmsplugin %}
-.. _DjangoCMS: https://docs.django-cms.org/en/release-3.11.x/{% endif %}
+.. _DjangoCMS: https://docs.django-cms.org/{% endif %}
 
 {{ '=' * cookiecutter.project_name|length }}
 {{ cookiecutter.project_name }}

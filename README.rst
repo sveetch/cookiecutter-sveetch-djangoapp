@@ -13,7 +13,7 @@ Cookiecutter for Django application
 
 This a `Cookiecutter`_ template to produce a Django application package.
 
-It emphases on simple application with quality and not any relation to
+It emphases on a simple application with quality and not any relation to
 any service (state badge, pyup, travis, etc..) except
 `Read the Docs service <https://readthedocs.org/>`_ for documentation publishing.
 
@@ -27,7 +27,7 @@ Feature resume
 **************
 
 * Compatibility with last stable versions (Python, Django, etc..);
-* Included basic application ready to run;
+* Included a basic Blog application ready to run;
 * Enforce good development behaviors;
 * Package ready to release with quality coverage;
 * Optional modern frontend (Node.js, Webpack, Bootstrap);

@@ -1,5 +1,5 @@
-const path = require("path");
-const webpack = require('webpack');
+const Path = require("path");
+const Webpack = require('webpack');
 const BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
 
     // Built JS files goes into sandbox staticfile directory
     output: {
-        path: path.resolve("../sandbox/static-sources/js"),
+        path: Path.resolve("../sandbox/static-sources/js"),
         //filename: "[name]-[contenthash].js",
         filename: "[name].js",
         publicPath: "/static/js/",
@@ -46,8 +46,8 @@ module.exports = {
     // Enabled webpack plugins with their config
     plugins: [
         new BundleTracker({
-            path: __dirname,
-            filename: '../sandbox/static-sources/webpack-stats.json'
-        }),
+            path: Path.join(__dirname, '../sandbox/static-sources'),
+            filename: 'webpack-stats.json'
+        })
     ],
 };

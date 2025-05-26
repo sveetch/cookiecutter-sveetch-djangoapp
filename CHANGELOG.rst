@@ -21,8 +21,13 @@ Developement
 * [template] Added dummy ``pyproject.toml`` to fix install with recent Pip and
   Setuptools. This is until template is fully moved to 'pyproject.toml';
 * [template] Moved Django manage script from sandbox to template root;
-* Added missing setting ``DEFAULT_AUTO_FIELD`` required since Django 4.2;
-* Enabled Sphinx extension ``sphinx.ext.todo`` in documentation configuration;
+* [template] Added missing setting ``DEFAULT_AUTO_FIELD`` required since Django 4.2;
+* [template] Enabled Sphinx extension ``sphinx.ext.todo`` in documentation
+  configuration;
+* [template] Updated frontend to Bootstrap 5.3.6 and sass-embedded;
+
+TODO:
+    * New DjangoCMS settings
 
 
 Version 0.7.2 - 2024/09/18
