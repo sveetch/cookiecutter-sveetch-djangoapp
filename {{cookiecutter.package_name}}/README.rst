@@ -13,10 +13,10 @@
 Dependencies
 ************
 
-* `Python`_>=3.9;
-* `Django`_>=4.2,<5.0;{% if cookiecutter.include_api %}
-* `Django REST framework`_>=3.14.0;{% endif %}{% if cookiecutter.include_cmsplugin %}
-* `DjangoCMS`_>=3.11.0,<4.0;{% endif %}
+* `Python`_>=3.10;
+* `Django`_>=4.2;{% if cookiecutter.include_api %}
+* `Django REST framework`_>=3.16.0;{% endif %}{% if cookiecutter.include_cmsplugin %}
+* `DjangoCMS`_>5.0.0;{% endif %}
 
 
 Links

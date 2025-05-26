@@ -192,7 +192,7 @@ if __name__ == "__main__":
     # project root, so we just use '.' (resolved to absolute path for sanity)
     manager = PostGenerationHookManager(Path(".").resolve())
 
-    # Remove files related to CLI if option to include CLI is disabled
+    # Remove files related to API if option to include it is disabled
     if not context["include_api"]:
         manager.cleaning_files(
             "Removing API files",
@@ -207,7 +207,7 @@ if __name__ == "__main__":
             ]
         )
 
-    # Remove files related to CMS plugin if option to include plugin is disabled
+    # Remove files related to CMS plugin if option to include it is disabled
     if not context["include_cmsplugin"]:
         manager.cleaning_files(
             "Removing DjangoCMS plugin files",
@@ -228,7 +228,7 @@ if __name__ == "__main__":
             ]
         )
 
-    # Remove files related to frontend if option to include frontend is disabled
+    # Remove files related to frontend if option to include it is disabled
     if not context["include_frontend"]:
         manager.cleaning_files(
             "Removing frontend files",

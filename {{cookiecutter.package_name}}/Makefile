@@ -13,7 +13,7 @@ SPHINX_RELOAD_BIN=$(PYTHON_BIN) docs/sphinx_reload.py
 TOX_BIN=$(VENV_PATH)/bin/tox
 TWINE_BIN=$(VENV_PATH)/bin/twine
 
-DJANGO_MANAGE=$(SANDBOX_DIR)/manage.py
+DJANGO_MANAGE=manage.py
 
 PACKAGE_NAME={{ cookiecutter.package_name }}
 PACKAGE_SLUG={{ cookiecutter.package_name.replace('-', '_') }}
@@ -193,8 +193,7 @@ check-migrations:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Checking for pending backend model migrations <---$(FORMATRESET)\n"
 	@echo ""
-	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --dry-run -v 3 $(APPLICATION_NAME)
-	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check -v 3 $(APPLICATION_NAME)
+	$(PYTHON_BIN) $(DJANGO_MANAGE) makemigrations --check --dry-run -v 3 $(APPLICATION_NAME)
 .PHONY: check-migrations
 
 migrate:
@@ -305,7 +304,7 @@ test:
 	@echo ""
 	@printf "$(FORMATBLUE)$(FORMATBOLD)---> Tests <---$(FORMATRESET)\n"
 	@echo ""
-	$(PYTEST_BIN) tests/
+	$(PYTEST_BIN) --reuse-db tests/
 	rm -Rf var/media-tests/
 .PHONY: test
 

@@ -8,9 +8,25 @@ Changelog
   management, documentation, developement, etc..);
 * Prefix ``[template]`` is for changes on the application template itself;
 
+Developement
+************
+
+* [template] Removed support for Python<3.10;
+* [template] Removed support for Django<4.2;
+* [template] Removed support for djangorestframework<3.16.0;
+* [template] Removed support for django-cms<5.0.0;
+* [template] Removed support for djangocms-text-ckeditor in profit of
+  djangocms-text>=0.5.1;
+* [template] Updated Tox matrix for tested supports;
+* [template] Added dummy ``pyproject.toml`` to fix install with recent Pip and
+  Setuptools. This is until template is fully moved to 'pyproject.toml';
+* [template] Moved Django manage script from sandbox to template root;
+* Added missing setting ``DEFAULT_AUTO_FIELD`` required since Django 4.2;
+* Enabled Sphinx extension ``sphinx.ext.todo`` in documentation configuration;
+
 
 Version 0.7.2 - 2024/09/18
---------------------------
+**************************
 
 * [cookie] Minor change to upgrade cookie documentation requirements;
 * [cookie] Adopted Tox for quality control on project generation instead of the shell
@@ -27,7 +43,7 @@ Version 0.7.2 - 2024/09/18
 
 
 Version 0.7.1 - 2024/09/11
---------------------------
+**************************
 
 * [cookie] Added missing credits for SVG repo;
 * [template] Changed Pytest configuration so it adopts cleaner options for verbosity
@@ -46,7 +62,7 @@ Version 0.7.1 - 2024/09/11
 
 
 Version 0.7.0 - 2023/10/30
---------------------------
+**************************
 
 This is a major upgrade to add DjangoCMS plugin option, improve quality and
 documentation.
@@ -72,7 +88,7 @@ documentation.
 
 
 Version 0.6.0 - 2023/10/20
---------------------------
+**************************
 
 This is a major upgrade to improve quality, documentation and package.
 
