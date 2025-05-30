@@ -212,7 +212,6 @@ if __name__ == "__main__":
         manager.cleaning_files(
             "Removing DjangoCMS plugin files",
             [
-                "{{cookiecutter.app_name}}/factories/cms.py",
                 "{{cookiecutter.app_name}}/forms/",
                 "{{cookiecutter.app_name}}/plugins/",
                 "{{cookiecutter.app_name}}/cms_plugins.py",
@@ -220,6 +219,7 @@ if __name__ == "__main__":
                     "{{cookiecutter.app_name}}/templates/{{cookiecutter.app_name}}/"
                     "blog_plugin.html"
                 ),
+                "{{cookiecutter.app_name}}/utils/cms_api.py",
                 "{{cookiecutter.app_name}}/utils/cms_tests.py",
                 "docs/references/plugins.rst",
                 "sandbox/templates/menus/",

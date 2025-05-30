@@ -162,9 +162,7 @@ FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 """
 Django REST Framework configuration
 """
-INSTALLED_APPS.extend([
-    "rest_framework",
-])
+INSTALLED_APPS.append("rest_framework")
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -178,6 +176,7 @@ REST_FRAMEWORK = {
 """
 DjangoCMS configuration
 """
+CMS_CONFIRM_VERSION4 = True
 
 # Admin style need to be put before Django admin
 INSTALLED_APPS[0:0] = [
@@ -190,7 +189,8 @@ INSTALLED_APPS.extend([
     "treebeard",
     "menus",
     "sekizai",
-    "djangocms_text_ckeditor",
+    "djangocms_text",
+    "djangocms_text.contrib.text_ckeditor4",
 ])
 
 # Enable CMS middlewares
@@ -202,7 +202,6 @@ MIDDLEWARE.extend([
     "cms.middleware.language.LanguageCookieMiddleware",
 ])
 
-# Required since DjangoCMS 3.7.2
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # Enable required cms context processors
@@ -215,6 +214,22 @@ TEMPLATES[0]["OPTIONS"]["context_processors"].extend([
 CMS_TEMPLATES = [
     ("pages/default.html", "Default"),
 ]
+
+TEXT_EDITOR = "djangocms_text.contrib.text_ckeditor4.ckeditor4"
+
+
+"""
+Settings for optional 'djangocms-versioning'
+"""
+try:
+    import djangocms_versioning
+except ImportError:
+    pass
+else:
+    INSTALLED_APPS.append("djangocms_versioning")
+
+    # Allow deletion of version objects
+    DJANGOCMS_VERSIONING_ALLOW_DELETING_VERSIONS = True
 {% endif %}
 """
 SPECIFIC BASE APPLICATIONS SETTINGS BELOW
