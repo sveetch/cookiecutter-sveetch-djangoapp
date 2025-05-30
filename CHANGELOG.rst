@@ -8,8 +8,8 @@ Changelog
   management, documentation, developement, etc..);
 * Prefix ``[template]`` is for changes on the application template itself;
 
-Developement
-************
+Version 0.8.0 - 2025/05/30
+**************************
 
 * [template] Removed support for Python<3.10;
 * [template] Removed support for Django<4.2;
@@ -25,9 +25,9 @@ Developement
 * [template] Enabled Sphinx extension ``sphinx.ext.todo`` in documentation
   configuration;
 * [template] Updated frontend to Bootstrap 5.3.6 and sass-embedded;
-
-TODO:
-    * New DjangoCMS settings
+* [template] Updated CMS settings for DjangoCMS>=4;
+* [template] Updated CMS plugin tests to correctly work with DjangoCMS>=4;
+* [template] Added support for optionnal djangocms-versioning;
 
 
 Version 0.7.2 - 2024/09/18

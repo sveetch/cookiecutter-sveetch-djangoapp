@@ -10,9 +10,10 @@ dist
 __pycache__/
 *.py[cod]
 
-# Site media and builded statics
+# Site media and built statics
 /var/
-/sandbox/static
+/sandbox/static-sources/
+/frontend/package-lock.json
 
 # Settings
 localsettings.py
