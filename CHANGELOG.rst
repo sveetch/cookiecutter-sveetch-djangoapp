@@ -18,6 +18,10 @@ Developement
 * [template] Updated frontend 'package.json' command 'css' for a useless
   '--silence-deprecation' argument;
 * [template] Upgraded frontend engines requirements to Node 22;
+* [template] Added support for Python 3.12;
+* [template] Added support for Django 6.0 (requires Python>=3.12);
+* [template] Upgraded support for DjangoCMS 5.x to version 5.0.5 since it includes
+  useful fixes;
 
 
 Version 0.8.0 - 2025/05/30
