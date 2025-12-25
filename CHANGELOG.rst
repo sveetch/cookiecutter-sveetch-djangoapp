@@ -17,6 +17,8 @@ Developement
   install icons in sandbox;
 * [template] Updated frontend 'package.json' command 'css' for a useless
   '--silence-deprecation' argument;
+* [template] Pinned sass-embedded to 1.95.1 to remove annoying warning until fixed
+  from a more recent Bootstrap version;
 * [template] Upgraded frontend engines requirements to Node 22;
 * [template] Added support for Python 3.12;
 * [template] Added support for Django 6.0 (requires Python>=3.12);

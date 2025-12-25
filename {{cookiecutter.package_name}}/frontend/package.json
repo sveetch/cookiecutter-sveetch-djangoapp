@@ -5,7 +5,7 @@
     "author": "{{ cookiecutter.author_name }} <{{ cookiecutter.author_email }}>",
     "private": true,
     "scripts": {
-        "css": "sass --load-path=./node_modules --silence-deprecation=color-functions --silence-deprecation=global-builtin --silence-deprecation=import ./scss/:../sandbox/static-sources/css/",
+        "css": "sass --load-path=./node_modules --silence-deprecation=color-functions --silence-deprecation=global-builtin --silence-deprecation=import --silence-deprecation=if-function ./scss/:../sandbox/static-sources/css/",
         "css-prod": "sass --style compressed --load-path=./node_modules ./scss/:../sandbox/static-sources/css/",
         "watch-css": "nodemon --watch scss/ --ext scss --exec \"npm run-script css\"",
         "js": "webpack --mode development --progress",
@@ -16,7 +16,7 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "5.3.8",
         "bootstrap-icons": "^1.13.1",
-        "sass-embedded": "^1.79.0"
+        "sass-embedded": "1.95.1"
     },
     "devDependencies": {
         "@babel/cli": "^7.27.0",
