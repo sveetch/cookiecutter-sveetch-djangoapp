@@ -8,6 +8,18 @@ Changelog
   management, documentation, developement, etc..);
 * Prefix ``[template]`` is for changes on the application template itself;
 
+Developement
+************
+
+* [template] Upgraded frontend to Bootstrap 5.3.8 and minor updates on frontend dev
+  stack;
+* [template] Upgraded frontend to Bootstrap-icons 1.13.1 and fixed Makefile to properly
+  install icons in sandbox;
+* [template] Updated frontend 'package.json' command 'css' for a useless
+  '--silence-deprecation' argument;
+* [template] Upgraded frontend engines requirements to Node 22;
+
+
 Version 0.8.0 - 2025/05/30
 **************************
 
